@@ -43,4 +43,7 @@ dependencies {
     implementation rootProject.libraries.okhttp
     implementation rootProject.libraries.okhttpLoggingInterceptor
 
+
+
+    implementation project(':domain')
 }
