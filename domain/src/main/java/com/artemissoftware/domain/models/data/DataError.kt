@@ -1,6 +1,6 @@
 package com.artemissoftware.domain.models.data
 
 data class DataError(
-    val code: String = "",
+    val code: Int,
     val message: String = "",
 )
