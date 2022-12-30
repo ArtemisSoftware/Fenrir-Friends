@@ -7,3 +7,12 @@ java {
     sourceCompatibility = JavaVersion.VERSION_1_7
     targetCompatibility = JavaVersion.VERSION_1_7
 }
+
+dependencies {
+
+    implementation rootProject.libraries.kotlinxCoroutinesCore
+    implementation rootProject.libraries.dagger
+
+
+    testImplementation rootProject.tests.kotlinxCoroutinesTest
+}
