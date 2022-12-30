@@ -38,4 +38,6 @@ dependencies {
     androidTestImplementation rootProject.tests.junitExtension
     androidTestImplementation rootProject.tests.espressoCore
 
+    implementation rootProject.libraries.gson
+
 }
