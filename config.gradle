@@ -25,6 +25,9 @@ ext.versions = [
 
         lifecycleRuntimeKtx     : '2.3.1',
 
+        retrofit                : '2.9.0',
+        okhttp                  : '5.0.0-alpha.11',
+
         junit                   : '4.13.2',
         junitExtension          : '1.1.4',
 
@@ -43,7 +46,10 @@ ext.libraries = [
 
         composeUiTooling                : "androidx.compose.ui:ui-tooling:$versions.compose",
 
-        gson                            : "com.google.code.gson:gson:$versions.gson"
+        retrofit                        : "com.squareup.retrofit2:retrofit:$versions.retrofit",
+        retrofitConverterGson           : "com.squareup.retrofit2:converter-gson:$versions.retrofit",
+        okhttp                          : "com.squareup.okhttp3:okhttp:$versions.okhttp",
+        okhttpLoggingInterceptor        : "com.squareup.okhttp3:logging-interceptor:$versions.okhttp"
 
 ]
 
