@@ -38,31 +38,31 @@ class GetBreedsUseCaseTest: BaseUseCaseTest() {
             )
         )
 
-        whenever(breedRepository.getBreeds()).thenReturn(
+        whenever(breedRepository.getBreeds(limit = 1, page = 1)).thenReturn(
             DataResponse(data = breeds)
         )
 
-        val emissions = getBreedsUseCase().toList()
+        val emissions = getBreedsUseCase(limit = 1, page = 1).toList()
 
         assert(emissions[0] is Resource.Loading)
         assert(emissions[1] is Resource.Success)
 
-        verify(breedRepository, times(1)).getBreeds()
+        verify(breedRepository, times(1)).getBreeds(limit = 1, page = 1)
     }
 
 
     @Test
     fun `get breeds return failure`() = runBlockingTest {
 
-        whenever(breedRepository.getBreeds()).thenReturn(
+        whenever(breedRepository.getBreeds(limit = 1, page = 1)).thenReturn(
             DataResponse(error = DataError(message = "No breeds available"))
         )
 
-        val emissions = getBreedsUseCase().toList()
+        val emissions = getBreedsUseCase(limit = 1, page = 1).toList()
 
         assert(emissions[0] is Resource.Loading)
         assert(emissions[1] is Resource.Error)
 
-        verify(breedRepository, times(1)).getBreeds()
+        verify(breedRepository, times(1)).getBreeds(limit = 1, page = 1)
     }
 }

@@ -7,13 +7,13 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class GetBreedsUseCase @Inject constructor(private val breedRepository: BreedRepository) {
+class SearchBreedUseCase @Inject constructor(private val breedRepository: BreedRepository) {
 
-    operator fun invoke(limit: Int, page: Int): Flow<Resource<List<Breed>>> = flow {
+    operator fun invoke(query: String): Flow<Resource<List<Breed>>> = flow {
 
         emit(Resource.Loading())
 
-        val result = breedRepository.getBreeds(limit = limit, page = page)
+        val result = breedRepository.searchBreed(query = query)
 
         result.data?.let { breeds->
             emit(Resource.Success(data = breeds))

@@ -14,11 +14,27 @@ class BreedRepositoryImpl @Inject constructor(
     private val dogApiSource: DogApiSource
 ) : BreedRepository {
 
-    override suspend fun getBreeds(): DataResponse<List<Breed>> {
+    override suspend fun getBreeds(limit: Int, page: Int): DataResponse<List<Breed>> {
 
         return try {
 
             val apiResponse = safeApiCall { dogApiSource.getBreeds() }
+
+            return DataResponse(data = apiResponse.map { response ->
+                response.toBreed()
+            })
+
+        } catch (ex: FenrisFriendsNetworkException) {
+            DataResponse(error = ex.toDataError())
+        }
+    }
+
+    override suspend fun searchBreed(query: String): DataResponse<List<Breed>> {
+
+        return try {
+
+            val apiResponse = safeApiCall { dogApiSource.getBreeds() }
+                .filter { breedDto -> breedDto.name.contains(query) }
 
             return DataResponse(data = apiResponse.map { response ->
                 response.toBreed()
