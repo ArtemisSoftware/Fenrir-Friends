@@ -25,14 +25,17 @@ ext.versions = [
 
         kotlin                  : '1.7.20',
         kotlinxCoroutinesCore   : '1.6.4',
+        kotlinTestJunit         : '1.5.10',
 
         lifecycleRuntimeKtx     : '2.3.1',
+
 
         retrofit                : '2.9.0',
         okhttp                  : '5.0.0-alpha.11',
 
         junit                   : '4.13.2',
         junitExtension          : '1.1.4',
+
 
 ]
 
@@ -68,7 +71,9 @@ ext.tests = [
         uiTestJunit4            : "androidx.compose.ui:ui-test-junit4:$versions.compose",
         uiTestManifest          : "androidx.compose.ui:ui-test-manifest:$versions.compose",
 
-        kotlinxCoroutinesTest   : "org.jetbrains.kotlinx:kotlinx-coroutines-test:$versions.kotlinxCoroutinesCore"
+        kotlinxCoroutinesTest   : "org.jetbrains.kotlinx:kotlinx-coroutines-test:$versions.kotlinxCoroutinesCore",
+        kotlinTestJunit         : "org.jetbrains.kotlin:kotlin-test-junit:$versions.kotlinTestJunit",
+
 
 ]
 
