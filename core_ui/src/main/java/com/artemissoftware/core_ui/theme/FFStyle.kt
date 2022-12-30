@@ -1,4 +1,4 @@
-package com.artemissoftware.core_ui.ui.theme
+package com.artemissoftware.core_ui.theme
 
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
@@ -14,7 +14,15 @@ private val NewRodinFont = FontFamily(
     Font(R.font.new_rodin, FontWeight.Bold)
 )
 
-val TextNewRodinFont = TextStyle(
+val TextNewRodin = TextStyle(
     fontFamily = NewRodinFont,
     fontSize = 14.sp
+)
+
+val TextNewRodin12 = TextNewRodin.copy(
+    fontSize = 12.sp
+)
+
+val TextNewRodinBold = TextNewRodin.copy(
+    fontWeight = FontWeight.Bold
 )
