@@ -29,6 +29,7 @@ ext.versions = [
 
         lifecycleRuntimeKtx     : '2.3.1',
 
+        mockito                 : '4.1.0',
 
         retrofit                : '2.9.0',
         okhttp                  : '5.0.0-alpha.11',
@@ -74,7 +75,7 @@ ext.tests = [
         kotlinxCoroutinesTest   : "org.jetbrains.kotlinx:kotlinx-coroutines-test:$versions.kotlinxCoroutinesCore",
         kotlinTestJunit         : "org.jetbrains.kotlin:kotlin-test-junit:$versions.kotlinTestJunit",
 
-
+        mockito                 : "org.mockito.kotlin:mockito-kotlin:$versions.mockito",
 ]
 
 ext.classpath = [
