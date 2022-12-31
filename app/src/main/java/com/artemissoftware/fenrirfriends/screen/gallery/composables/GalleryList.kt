@@ -12,7 +12,7 @@ import com.artemissoftware.fenrirfriends.screen.gallery.GalleryEvents
 import com.artemissoftware.fenrirfriends.screen.gallery.GalleryState
 
 @Composable
-private fun GalleryList(
+fun GalleryList(
     state: GalleryState,
     events: ((GalleryEvents) -> Unit)? = null
 ){

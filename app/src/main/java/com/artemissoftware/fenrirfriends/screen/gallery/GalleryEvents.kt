@@ -1,9 +1,11 @@
 package com.artemissoftware.fenrirfriends.screen.gallery
 
+import com.artemissoftware.domain.models.Breed
 import com.artemissoftware.fenrirfriends.base.events.FFBaseEvents
-import com.artemissoftware.fenrirfriends.screen.models.BreedUi
 
 sealed class GalleryEvents: FFBaseEvents() {
 
-    data class GoToBreedDetail(val breedUi: BreedUi) : GalleryEvents()
+    data class GoToBreedDetail(val breed: Breed) : GalleryEvents()
+    object ReorderAlphabetic: GalleryEvents()
+    object ChangeView: GalleryEvents()
 }
