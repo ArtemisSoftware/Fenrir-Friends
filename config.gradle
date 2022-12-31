@@ -24,6 +24,10 @@ ext.versions = [
         gradle                  : '7.3.1',
         gson                    : '2.10',
 
+
+        hilt                    : '2.44.2',
+        hiltNavigationCompose   : '1.0.0-alpha03',
+
         kotlin                  : '1.7.20',
         kotlinxCoroutinesCore   : '1.6.4',
         kotlinTestJunit         : '1.5.10',
@@ -57,6 +61,7 @@ ext.libraries = [
 
         composeUiTooling                : "androidx.compose.ui:ui-tooling:$versions.compose",
 
+
         retrofit                        : "com.squareup.retrofit2:retrofit:$versions.retrofit",
         retrofitConverterGson           : "com.squareup.retrofit2:converter-gson:$versions.retrofit",
         okhttp                          : "com.squareup.okhttp3:okhttp:$versions.okhttp",
@@ -69,8 +74,11 @@ ext.libraries = [
         navigationCompose               : "androidx.navigation:navigation-compose:$versions.navigationCompose",
         gson                            : "com.google.code.gson:gson:$versions.gson",
 
-
         coilCompose                     : "io.coil-kt:coil-compose:$versions.coil",
+
+        hiltAndroid                     : "com.google.dagger:hilt-android:$versions.hilt",
+        hiltAndroidCompiler             : "com.google.dagger:hilt-android-compiler:$versions.hilt",
+        hiltNavigationCompose           : "androidx.hilt:hilt-navigation-compose:$versions.hiltNavigationCompose",
 ]
 
 ext.tests = [
@@ -88,5 +96,7 @@ ext.tests = [
 ]
 
 ext.classpath = [
+
+        hilt             : "com.google.dagger:hilt-android-gradle-plugin:$versions.hilt",
 
 ]

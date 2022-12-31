@@ -2,6 +2,8 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-parcelize'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -57,6 +59,11 @@ dependencies {
     implementation rootProject.libraries.composeUiToolingPreview
     implementation rootProject.libraries.composeMaterial
     implementation rootProject.libraries.coilCompose
+
+    implementation rootProject.libraries.hiltAndroid
+    kapt rootProject.libraries.hiltAndroidCompiler
+    implementation rootProject.libraries.hiltNavigationCompose
+
 
     testImplementation rootProject.tests.junit
     androidTestImplementation rootProject.tests.junitExtension
