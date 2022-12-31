@@ -11,4 +11,8 @@ class DogApiSourceImpl @Inject constructor (private val dogApi: DogApi): DogApiS
         return HandleApi.safeApiCall { dogApi.getBreeds() }
     }
 
+    override suspend fun getBreeds(limit: Int, page: Int): List<BreedDto> {
+        return HandleApi.safeApiCall { dogApi.getBreeds(limit = limit, page = page) }
+    }
+
 }

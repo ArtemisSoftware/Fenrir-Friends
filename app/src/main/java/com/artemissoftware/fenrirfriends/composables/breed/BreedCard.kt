@@ -27,7 +27,8 @@ import com.artemissoftware.fenrirfriends.composables.breed.models.BreedDetailTyp
 @Composable
 fun BreedCard(
     breed: Breed,
-    detailType: BreedDetailType = BreedDetailType.BULLET
+    detailType: BreedDetailType = BreedDetailType.BULLET,
+    onClick: (Breed) -> Unit,
 ) {
 
     val painter = rememberAsyncImagePainter(
@@ -39,6 +40,7 @@ fun BreedCard(
     )
 
     FFCard(
+        onClick = { onClick.invoke(breed) },
         modifier = Modifier
             .wrapContentSize()
             .clip(RoundedCornerShape(4.dp))
@@ -66,6 +68,6 @@ fun BreedCard(
 @Preview(showBackground = true)
 @Composable
 private fun BreedCardPreview() {
-    BreedCard(breed =  Breed.mockBreeds[0], detailType = BreedDetailType.BULLET)
+    BreedCard(breed =  Breed.mockBreeds[0], detailType = BreedDetailType.BULLET, onClick = {})
 }
 

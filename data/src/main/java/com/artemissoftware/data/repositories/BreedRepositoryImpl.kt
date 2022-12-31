@@ -18,7 +18,7 @@ class BreedRepositoryImpl @Inject constructor(
 
         return try {
 
-            val apiResponse = safeApiCall { dogApiSource.getBreeds() }
+            val apiResponse = safeApiCall { dogApiSource.getBreeds(limit = limit, page = page) }
 
             return DataResponse(data = apiResponse.map { response ->
                 response.toBreed()
