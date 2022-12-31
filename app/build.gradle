@@ -55,6 +55,7 @@ dependencies {
     implementation rootProject.libraries.composeUi
     implementation rootProject.libraries.composeUiToolingPreview
     implementation rootProject.libraries.composeMaterial
+    implementation rootProject.libraries.coilCompose
 
     testImplementation rootProject.tests.junit
     androidTestImplementation rootProject.tests.junitExtension

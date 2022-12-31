@@ -1,6 +1,7 @@
 package com.artemissoftware.core_ui.composables.scaffold
 
 import androidx.annotation.RawRes
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -11,11 +12,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavHostController
 import com.artemissoftware.core_ui.R
+import com.artemissoftware.core_ui.composables.connectivity.FFConnectivityStatus
 import com.artemissoftware.core_ui.composables.dialog.FFDialog
 import com.artemissoftware.core_ui.composables.loading.FFLoading
 import com.artemissoftware.core_ui.composables.navigationbar.FFBottomNavigationBar
 import com.artemissoftware.core_ui.navigation.models.BottomBarItem
 
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun FFScaffold(
     modifier: Modifier = Modifier/*.statusBarsPadding()*/,
@@ -32,6 +35,8 @@ fun FFScaffold(
         modifier = Modifier
             .fillMaxSize()
     ) {
+
+        FFConnectivityStatus()
 
         var scaffoldModifier = modifier
             .fillMaxSize()
