@@ -23,6 +23,10 @@ val TextNewRodin12 = TextNewRodin.copy(
     fontSize = 12.sp
 )
 
+val TextNewRodin8 = TextNewRodin.copy(
+    fontSize = 8.sp
+)
+
 val TextNewRodinBold = TextNewRodin.copy(
     fontWeight = FontWeight.Bold
 )
