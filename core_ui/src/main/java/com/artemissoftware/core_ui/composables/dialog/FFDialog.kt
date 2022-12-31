@@ -8,6 +8,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.TextButton
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Build
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -15,6 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.artemissoftware.core_ui.R
@@ -26,6 +29,7 @@ import com.artemissoftware.core_ui.composables.scaffold.FFUiScaffoldState
 import com.artemissoftware.core_ui.composables.text.FFText
 import com.artemissoftware.core_ui.theme.TextNewRodinBold
 import com.artemissoftware.core_ui.theme.primaryText
+import kotlinx.coroutines.MainScope
 
 @Composable
 fun FFDialog(ffUiScaffoldState: FFUiScaffoldState) {
@@ -199,7 +203,34 @@ private fun FFDialogOptions(
 
 
 
+@Preview
+@Composable
+private fun FFDialogPreview(){
 
+    val dialogTypeSuccess = FFDialogType.Success(
+        title =  "Get updates",
+        description = "Allow permission to send notifications every day of the year",
+        icon = Icons.Filled.Build,
+        dialogOptions = FFDialogOptions(
+            confirmationTextId = R.string.confirm,
+            cancelTextId = R.string.cancel
+        )
+    )
+
+    val dialogTypError = FFDialogType.Error(
+        title =  "Get updates",
+        description = "Allow permission to send notifications every day of the year",
+        imageId = R.drawable.ic_android,
+        dialogOptions = FFDialogOptions(
+            confirmationTextId = R.string.confirm
+        )
+    )
+
+    Column {
+        FFDialog(FFUiScaffoldState(MainScope()), dialogTypeSuccess)
+        FFDialog(FFUiScaffoldState(MainScope()), dialogTypError)
+    }
+}
 
 
 

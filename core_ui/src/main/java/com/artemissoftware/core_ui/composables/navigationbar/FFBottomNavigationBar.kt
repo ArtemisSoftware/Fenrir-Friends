@@ -11,6 +11,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.artemissoftware.core_ui.composables.scaffold.FFUiScaffoldState
 import com.artemissoftware.core_ui.composables.text.FFText
 import com.artemissoftware.core_ui.navigation.models.BaseDestination
 import com.artemissoftware.core_ui.navigation.models.BottomBarItem
@@ -22,7 +23,7 @@ fun FFBottomNavigationBar(
     modifier: Modifier = Modifier,
     navController: NavHostController? = null,
     items: List<BottomBarItem>,
-    selectedDestination: BaseDestination,
+    ffUiScaffoldState: FFUiScaffoldState? = null,
     onItemClick: (BottomBarItem) -> Unit
 ) {
 
@@ -35,37 +36,40 @@ fun FFBottomNavigationBar(
 
             if (showBottomBar(currentDestination, items = items)) {
 
-                BottomNavigation(
-                    modifier = modifier,
-                    backgroundColor = BottomGreen,
-                    contentColor = Color.Black
-                ) {
+                ffUiScaffoldState?.let {
 
-                    items.forEach { item ->
+                    BottomNavigation(
+                        modifier = modifier,
+                        backgroundColor = BottomGreen,
+                        contentColor = Color.Black
+                    ) {
 
-                        val isSelected = item.destination.route == selectedDestination.route
+                        items.forEach { item ->
 
-                        BottomNavigationItem(
-                            icon = {
-                                Icon(
-                                    imageVector = item.icon,
-                                    contentDescription = stringResource(id = item.title)
-                                )
-                            },
-                            label = {
-                                FFText(
-                                    text = stringResource(id = item.title),
-                                    style = TextNewRodin8
-                                )
-                            },
-                            selectedContentColor = Color.Black,
-                            unselectedContentColor = Color.Black.copy(0.4f),
-                            alwaysShowLabel = true,
-                            selected = isSelected,
-                            onClick = {
-                                onItemClick(item)
-                            }
-                        )
+                            val isSelected = item.destination.route == it.getSelectedBottomBarDestination(items[0].destination).route
+
+                            BottomNavigationItem(
+                                icon = {
+                                    Icon(
+                                        imageVector = item.icon,
+                                        contentDescription = stringResource(id = item.title)
+                                    )
+                                },
+                                label = {
+                                    FFText(
+                                        text = stringResource(id = item.title),
+                                        style = TextNewRodin8
+                                    )
+                                },
+                                selectedContentColor = Color.Black,
+                                unselectedContentColor = Color.Black.copy(0.4f),
+                                alwaysShowLabel = true,
+                                selected = isSelected,
+                                onClick = {
+                                    onItemClick(item)
+                                }
+                            )
+                        }
                     }
                 }
             }
