@@ -15,8 +15,9 @@ fun HomeScreen(
     FFScaffold(
         ffUiScaffoldState = scaffoldState,
         bottomBarItems = scaffoldState.bottomBarDestinations.value,
-        navController = navController
-    ) {
-        HomeNavigationGraph(navController = navController, scaffoldState = scaffoldState)
-    }
+        navController = navController,
+        content =  {
+            HomeNavigationGraph(navController = navController, scaffoldState = scaffoldState)
+        }
+    )
 }

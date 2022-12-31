@@ -2,6 +2,14 @@ package com.artemissoftware.fenrirfriends.navigation
 
 class DestinationRoutes {
 
+    object RootGraph : NavigationGraph {
+
+        override val graph = "root_graph"
+        override val startDestination = Destination.Home.route
+
+        val home = Destination.Home
+    }
+
     object HomeGraph : NavigationGraph {
 
         override val graph = "home_graph"

@@ -8,6 +8,7 @@ sealed class Destination(
     customArguments: List<CustomNavigationArgument> = emptyList(),
 ) : BaseDestination(route = route, customArguments = customArguments){
 
+    object Home : Destination(route = "HOME")
     object Gallery : Destination(route = "GALLERY")
     object BreedDetail : Destination(route = "BREED_DETAIL", customArguments = listOf(CustomNavigationArgument(NavigationArguments.BREED_UI)))
     object BreedSearch : Destination(route = "BREED_SEARCH")
