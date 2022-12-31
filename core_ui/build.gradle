@@ -46,6 +46,8 @@ dependencies {
     implementation rootProject.libraries.composeMaterial
 
     implementation rootProject.libraries.lottie
+    implementation rootProject.libraries.navigationCompose
+
 
     testImplementation rootProject.tests.junit
     androidTestImplementation rootProject.tests.junitExtension
