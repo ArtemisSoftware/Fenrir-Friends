@@ -17,7 +17,7 @@ import com.artemissoftware.core_ui.composables.text.FFText
 import com.artemissoftware.core_ui.theme.TextNewRodinBold
 
 @Composable
-private fun FFDialogMessage(dialogType: FFDialogType){
+fun FFDialogMessage(dialogType: FFDialogType){
 
     Column(
         modifier = Modifier.padding(16.dp)
