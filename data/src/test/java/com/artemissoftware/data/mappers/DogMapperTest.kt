@@ -47,7 +47,9 @@ class DogMapperTest {
         val breed = Breed(
             id = 1 ,
             name = "Affenpinscher",
-            url = "https://cdn2.thedogapi.com/images/BJa4kxc4X.jpg"
+            url = "https://cdn2.thedogapi.com/images/BJa4kxc4X.jpg",
+            group = "Toy",
+            origin = "Germany, France",
         )
 
         assertEquals(breed, breedDto.toBreed())

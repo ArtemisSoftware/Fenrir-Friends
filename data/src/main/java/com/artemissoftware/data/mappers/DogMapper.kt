@@ -8,7 +8,9 @@ fun BreedDto.toBreed() : Breed{
     return Breed(
         id = id,
         url = imageDto.url,
-        name = name
+        name = name,
+        origin = origin,
+        group = breedGroup
     )
 
 }
