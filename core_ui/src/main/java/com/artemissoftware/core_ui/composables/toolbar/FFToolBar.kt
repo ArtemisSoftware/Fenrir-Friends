@@ -22,6 +22,7 @@ fun FFToolBar(
     @DrawableRes backgroundId: Int = R.drawable.ic_top_app_bar_bg,
     onBackClicked: (() -> Unit)? = null,
     toolbarActions: @Composable RowScope.() -> Unit = {},
+    iconTint: Color = Color.Black
 ) {
     Box(
         modifier = Modifier
@@ -47,7 +48,8 @@ fun FFToolBar(
                 onBackClicked?.let {
                     FFToolbarAction(
                         imageVector = Icons.Filled.ArrowBack,
-                        onClicked = it
+                        onClicked = it,
+                        tint = iconTint
                     )
                 }
                 IconButton(onClick = {/* Do Something*/ }) {

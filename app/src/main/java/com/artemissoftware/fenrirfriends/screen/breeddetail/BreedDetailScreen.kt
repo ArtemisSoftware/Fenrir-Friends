@@ -48,6 +48,7 @@ private fun BreedDetailScreen(
         isLoading = state.isLoading,
         toolbar = {
             FFToolBar(
+                iconTint = Color.White,
                 onBackClicked = {
                     events?.invoke(BreedDetailEvents.PopBackStack)
                 }
