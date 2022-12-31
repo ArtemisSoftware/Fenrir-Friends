@@ -8,6 +8,7 @@ class DestinationRoutes {
         override val startDestination = Destination.Gallery.route
 
         val gallery = Destination.Gallery
+        val breadSearch = Destination.BreedSearch
     }
 
     object DetailGraph : NavigationGraph {

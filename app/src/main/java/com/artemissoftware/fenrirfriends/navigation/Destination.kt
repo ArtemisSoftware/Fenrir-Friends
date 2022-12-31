@@ -10,5 +10,6 @@ sealed class Destination(
 
     object Gallery : Destination(route = "GALLERY")
     object BreedDetail : Destination(route = "BREED_DETAIL", customArguments = listOf(CustomNavigationArgument(NavigationArguments.BREED_UI)))
+    object BreedSearch : Destination(route = "BREED_SEARCH")
 
 }

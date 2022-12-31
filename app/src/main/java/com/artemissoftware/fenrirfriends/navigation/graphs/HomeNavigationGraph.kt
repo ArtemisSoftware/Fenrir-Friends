@@ -5,6 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.artemissoftware.core_ui.composables.scaffold.FFUiScaffoldState
 import com.artemissoftware.fenrirfriends.navigation.DestinationRoutes.HomeGraph
+import com.artemissoftware.fenrirfriends.screen.breedsearch.BreedSearchRoute
 import com.artemissoftware.fenrirfriends.screen.gallery.GalleryRoute
 
 
@@ -21,6 +22,8 @@ fun HomeNavigationGraph(
     ) {
 
         GalleryRoute.composable(navGraphBuilder = this, scaffoldState = scaffoldState, navController = navController)
+
+        BreedSearchRoute.composable(navGraphBuilder = this, scaffoldState = scaffoldState, navController = navController)
 
         detailNavigationGraph(navController = navController, scaffoldState = scaffoldState)
     }
