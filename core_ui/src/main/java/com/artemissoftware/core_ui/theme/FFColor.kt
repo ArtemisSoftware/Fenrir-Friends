@@ -9,6 +9,9 @@ import androidx.compose.ui.graphics.Color
 val Colors.primaryText: Color
     get() = if (isLight) Color.Black else Color.White
 
+@get:Composable
+val Colors.secondaryBackground: Color
+    get() = if (isLight) Color(0xffffffff) else Color(0xff252525)
 
 val SuccessGreen = Color(0xFF4BCA81)
 val ErrorRed = Color(0xFFCC3300)
