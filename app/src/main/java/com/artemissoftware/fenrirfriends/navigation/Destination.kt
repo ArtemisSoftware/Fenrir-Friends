@@ -9,4 +9,6 @@ sealed class Destination(
 ) : BaseDestination(route = route, customArguments = customArguments){
 
     object Gallery : Destination(route = "GALLERY")
+    object BreedDetail : Destination(route = "BREED_DETAIL", customArguments = listOf(CustomNavigationArgument(NavigationArguments.BREED_UI)))
+
 }

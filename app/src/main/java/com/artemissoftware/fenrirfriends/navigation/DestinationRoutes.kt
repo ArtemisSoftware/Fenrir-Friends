@@ -9,4 +9,12 @@ class DestinationRoutes {
 
         val gallery = Destination.Gallery
     }
+
+    object DetailGraph : NavigationGraph {
+
+        override val graph = "detail_graph"
+        override val startDestination = Destination.BreedDetail.route
+
+        val detailBreed = Destination.BreedDetail
+    }
 }
