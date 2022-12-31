@@ -8,13 +8,14 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.artemissoftware.fenrirfriends.screen.gallery.GalleryEvents
-import com.artemissoftware.fenrirfriends.screen.gallery.GalleryState
+import com.artemissoftware.domain.models.Breed
+import com.artemissoftware.fenrirfriends.composables.breed.models.BreedDetailType
 
 @Composable
 fun GalleryList(
-    state: GalleryState,
-    events: ((GalleryEvents) -> Unit)? = null
+    breeds: List<Breed>,
+    onItemClick: (Breed) -> Unit,
+    detailType: BreedDetailType = BreedDetailType.BULLET
 ){
     LazyColumn(
         modifier = Modifier
@@ -23,12 +24,13 @@ fun GalleryList(
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
 
-        items(state.breeds) { breed->
+        items(breeds) { breed->
 
             BreedCard(
                 breed = breed,
+                detailType = detailType,
                 onClick = {
-                    events?.invoke(GalleryEvents.GoToBreedDetail(breed))
+                    onItemClick.invoke(it)
                 }
             )
         }

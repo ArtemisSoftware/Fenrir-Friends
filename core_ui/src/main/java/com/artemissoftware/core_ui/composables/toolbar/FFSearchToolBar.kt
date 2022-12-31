@@ -20,13 +20,14 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.artemissoftware.core_ui.R
 import com.artemissoftware.core_ui.composables.text.FFText
 import com.artemissoftware.core_ui.composables.textfield.FFTextField
 
 
 @Composable
 fun FFSearchToolBar(
-    @DrawableRes backgroundId: Int? = null,
+    @DrawableRes backgroundId: Int = R.drawable.ic_top_app_bar_bg,
     text: String,
     @StringRes placeholderTextId: Int,
     onTextChange: (String) -> Unit,

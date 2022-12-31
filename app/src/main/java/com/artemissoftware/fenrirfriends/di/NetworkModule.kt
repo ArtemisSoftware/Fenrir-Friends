@@ -2,6 +2,8 @@ package com.artemissoftware.fenrirfriends.di
 
 import android.os.Build
 import com.artemissoftware.data.remote.DogApi
+import com.artemissoftware.data.remote.source.DogApiSource
+import com.artemissoftware.data.remote.source.DogApiSourceImpl
 import com.artemissoftware.fenrirfriends.BuildConfig.*
 import dagger.Module
 import dagger.Provides
@@ -45,4 +47,10 @@ object NetworkModule {
             .create(DogApi::class.java)
     }
 
+
+    @Provides
+    @Singleton
+    fun provideDogApiSource(dogApi: DogApi): DogApiSource {
+        return DogApiSourceImpl(dogApi)
+    }
 }

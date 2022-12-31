@@ -22,8 +22,6 @@ fun HomeNavigationGraph(
 
         GalleryRoute.composable(navGraphBuilder = this, scaffoldState = scaffoldState, navController = navController)
 
-
-
-        //detailsNavigationGraph(navController = navController)
+        detailNavigationGraph(navController = navController, scaffoldState = scaffoldState)
     }
 }

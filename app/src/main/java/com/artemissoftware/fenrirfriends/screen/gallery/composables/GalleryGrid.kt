@@ -8,13 +8,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.artemissoftware.core_ui.composables.grid.FFStaggeredVerticalGrid
-import com.artemissoftware.fenrirfriends.screen.gallery.GalleryEvents
-import com.artemissoftware.fenrirfriends.screen.gallery.GalleryState
+import com.artemissoftware.domain.models.Breed
+import com.artemissoftware.fenrirfriends.composables.breed.models.BreedDetailType
 
 @Composable
 fun GalleryGrid(
-    state: GalleryState,
-    events: ((GalleryEvents) -> Unit)? = null
+    breeds: List<Breed>,
+    onItemClick: (Breed) -> Unit,
+    detailType: BreedDetailType = BreedDetailType.BULLET
 ){
     Column(
         modifier = Modifier
@@ -25,12 +26,13 @@ fun GalleryGrid(
             numColumns = 2,
             modifier = Modifier.padding(4.dp)
         ) {
-            state.breeds.forEach { breed ->
+            breeds.forEach { breed ->
 
                 BreedCard(
                     breed = breed,
+                    detailType = detailType,
                     onClick = {
-                        events?.invoke(GalleryEvents.GoToBreedDetail(breed))
+                        onItemClick.invoke(it)
                     }
                 )
 
