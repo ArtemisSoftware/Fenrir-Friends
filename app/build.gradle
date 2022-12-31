@@ -31,36 +31,6 @@ android {
     }
 
     with flavorConfig
-//
-//    flavorDimensions "env", "premium"
-//
-//    productFlavors {
-//        dev {
-//            dimension "env"
-//            applicationIdSuffix ".dev"
-//            manifestPlaceholders variant: 'Hecate Kennel - Dev'
-////            signingConfig signingConfigs.configDev
-////
-////            buildConfigField("String", "BASE_URL", "\"https://nodejs-appmobilidade-fe-dot-mobilidadeeletrica-edp-dev.appspot.com\"")
-//        }
-//
-//        prod {
-//            dimension "env"
-//            manifestPlaceholders variant: 'Hecate Kennel'
-////            signingConfig signingConfigs.configProd
-////
-////            buildConfigField("String", "BASE_URL", "\"https://nodejs-appmobilidade-fe-dot-mobilidadeeletrica-edp-dev.appspot.com\"")
-////            buildConfigField ("String", "LOLO", 'prod')
-//        }
-//        free {
-//            dimension "premium"
-//            buildConfigField "boolean", "PREMIUM", "false"
-//        }
-//        paid {
-//            dimension "premium"
-//            buildConfigField "boolean", "PREMIUM", "true"
-//        }
-//    }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8

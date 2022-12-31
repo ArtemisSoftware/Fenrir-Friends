@@ -13,3 +13,14 @@ fun Breed.toUI(): BreedUi {
         temperament = temperament
     )
 }
+
+fun BreedUi.toBreed(): Breed {
+    return Breed(
+        id = id,
+        name = name,
+        url = url,
+        group = group,
+        origin = origin,
+        temperament = temperament
+    )
+}
