@@ -1,6 +1,8 @@
 package com.artemissoftware.core_ui.navigation.models
 
 import android.net.Uri
+import androidx.navigation.NamedNavArgument
+import androidx.navigation.navArgument
 import com.google.gson.Gson
 
 
@@ -18,6 +20,13 @@ abstract class BaseDestination(
         customArguments.forEachIndexed { index, custom ->
             val symbol = if (index == 0) "?" else "&"
             append("$symbol${custom.key}={${custom.key}}")
+        }
+    }
+
+    val arguments: List<NamedNavArgument> = customArguments.map {
+        navArgument(it.key) {
+            type = it.type
+            nullable = it.nullable
         }
     }
 

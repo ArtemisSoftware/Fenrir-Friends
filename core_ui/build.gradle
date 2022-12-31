@@ -46,7 +46,7 @@ dependencies {
     implementation rootProject.libraries.composeMaterial
 
     implementation rootProject.libraries.lottie
-    implementation rootProject.libraries.navigationCompose
+    api rootProject.libraries.navigationCompose
     implementation rootProject.libraries.gson
 
     testImplementation rootProject.tests.junit
