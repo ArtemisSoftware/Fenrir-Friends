@@ -1,8 +1,8 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="name">Name</string>
     <string name="group">Group</string>
     <string name="origin">Origin</string>
     <string name="temperament">Temperament</string>
     <string name="ok">OK</string>
-    <string name="search_by_breed_name">Search by breed name</string>
+    <string name="search_by_breed_name" tools:ignore="ExtraTranslation">Search by breed name</string>
 </resources>
