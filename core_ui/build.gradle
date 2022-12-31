@@ -45,6 +45,7 @@ dependencies {
     implementation rootProject.libraries.composeUiTooling
     implementation rootProject.libraries.composeMaterial
 
+    implementation rootProject.libraries.lottie
 
     testImplementation rootProject.tests.junit
     androidTestImplementation rootProject.tests.junitExtension
