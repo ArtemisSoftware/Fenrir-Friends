@@ -8,5 +8,5 @@ sealed class Destination(
     customArguments: List<CustomNavigationArgument> = emptyList(),
 ) : BaseDestination(route = route, customArguments = customArguments){
 
-
+    object Gallery : Destination(route = "GALLERY")
 }
