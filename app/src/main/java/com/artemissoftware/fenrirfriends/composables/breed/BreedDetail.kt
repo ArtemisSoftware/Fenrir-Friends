@@ -17,11 +17,12 @@ import com.artemissoftware.fenrirfriends.composables.breed.models.BreedDetailTyp
 
 @Composable
 fun BreedDetail(
+    modifier: Modifier = Modifier,
     breed: Breed,
     detailType: BreedDetailType
 ) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
