@@ -45,11 +45,10 @@ fun BreedCard(
             .wrapContentSize()
             .clip(RoundedCornerShape(4.dp))
             .background(color = Color.White)
-            .padding(16.dp),
     ) {
 
         Column(
-            verticalArrangement = Arrangement.spacedBy(4.dp)
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             Image(
                 painter = painter,
@@ -58,7 +57,11 @@ fun BreedCard(
                 contentScale = ContentScale.Crop,
             )
 
-            BreedDetail(breed = breed, detailType = detailType)
+            BreedDetail(
+                breed = breed,
+                detailType = detailType,
+                modifier = Modifier.padding(12.dp)
+            )
         }
 
     }

@@ -5,18 +5,21 @@ import com.artemissoftware.core_ui.composables.dialog.models.FFDialogOptions
 import com.artemissoftware.core_ui.composables.dialog.models.FFDialogType
 import com.artemissoftware.domain.Resource
 import com.artemissoftware.domain.usecases.GetBreedsUseCase
+import com.artemissoftware.fenrirfriends.BuildConfig.ITEMS_PER_PAGE
 import com.artemissoftware.fenrirfriends.R
 import com.artemissoftware.fenrirfriends.base.FFBaseEventViewModel
 import com.artemissoftware.fenrirfriends.base.events.UiEvent
 import com.artemissoftware.fenrirfriends.navigation.DestinationRoutes
 import com.artemissoftware.fenrirfriends.screen.gallery.models.GalleryViewType
 import com.artemissoftware.fenrirfriends.screen.models.mappers.toUI
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
+@HiltViewModel
 class GalleryViewModel @Inject constructor(
     private val getBreedsUseCase: GetBreedsUseCase
 ): FFBaseEventViewModel<GalleryEvents>() {
@@ -48,7 +51,7 @@ class GalleryViewModel @Inject constructor(
 
     private fun getBreeds(){
 
-        getBreedsUseCase.invoke(limit = 1, page = 1).onEach { result ->
+        getBreedsUseCase.invoke(limit = ITEMS_PER_PAGE, page = 1).onEach { result ->
 
             when(result) {
                 is Resource.Success -> {

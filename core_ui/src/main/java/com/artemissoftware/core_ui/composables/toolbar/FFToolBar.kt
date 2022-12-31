@@ -26,13 +26,13 @@ fun FFToolBar(
 ) {
     Box(
         modifier = Modifier
-            .height(80.dp)
+            .wrapContentSize()
             .fillMaxWidth()
     ) {
 
         backgroundId?.let {
             Image(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier.fillMaxWidth(),
                 painter = painterResource(id = it),
                 contentDescription = "background_image",
                 contentScale = ContentScale.FillBounds
@@ -40,7 +40,6 @@ fun FFToolBar(
         }
 
         TopAppBar(
-            modifier = Modifier.padding(top = 24.dp),
             elevation = 0.dp,
             backgroundColor = Color.Transparent,
             title = {},
@@ -51,9 +50,6 @@ fun FFToolBar(
                         onClicked = it,
                         tint = iconTint
                     )
-                }
-                IconButton(onClick = {/* Do Something*/ }) {
-                    Icon(Icons.Filled.ArrowBack, null)
                 }
             },
             actions = {

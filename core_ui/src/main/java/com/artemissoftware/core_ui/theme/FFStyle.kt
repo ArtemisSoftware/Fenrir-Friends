@@ -16,11 +16,11 @@ private val NewRodinFont = FontFamily(
 
 val TextNewRodin = TextStyle(
     fontFamily = NewRodinFont,
-    fontSize = 14.sp
+    fontSize = 12.sp
 )
 
-val TextNewRodin12 = TextNewRodin.copy(
-    fontSize = 12.sp
+val TextNewRodin14 = TextNewRodin.copy(
+    fontSize = 14.sp
 )
 
 val TextNewRodin8 = TextNewRodin.copy(

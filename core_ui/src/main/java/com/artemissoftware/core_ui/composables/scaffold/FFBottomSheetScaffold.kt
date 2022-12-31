@@ -18,6 +18,7 @@ fun FFBottomSheetScaffold(
     sheetContent: @Composable ColumnScope.() -> Unit,
     content: @Composable (PaddingValues) -> Unit,
     toolbar: @Composable () -> Unit = {},
+    bottomSheetExpanded: Boolean = false
 ) {
 
     val sheetState = rememberBottomSheetState(

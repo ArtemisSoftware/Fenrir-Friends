@@ -13,7 +13,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import com.artemissoftware.core_ui.theme.TextNewRodin
-import com.artemissoftware.core_ui.theme.TextNewRodin12
+import com.artemissoftware.core_ui.theme.TextNewRodin14
 import com.artemissoftware.core_ui.theme.TextNewRodinBold
 import com.artemissoftware.core_ui.theme.primaryText
 
@@ -62,7 +62,7 @@ private fun FFTextPreview() {
 
         FFText(
             text = "Fenrir Friends - TextNewRodin12",
-            style = TextNewRodin12
+            style = TextNewRodin14
         )
 
     }

@@ -8,7 +8,7 @@ data class BreedUi(
     val id: Int,
     val name: String,
     val url: String,
-    val group: String,
-    val origin: String,
+    val group: String? = null,
+    val origin: String? = null,
     val temperament: String
 ) : Parcelable

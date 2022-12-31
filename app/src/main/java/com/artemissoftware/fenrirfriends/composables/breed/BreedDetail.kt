@@ -33,15 +33,20 @@ fun BreedDetail(
         )
 
         if(detailType == BreedDetailType.RESUME || detailType == BreedDetailType.FULL_DETAIL) {
-            BreedField(
-                fieldValue = breed.group,
-                filedName = stringResource(R.string.group)
-            )
 
-            BreedField(
-                fieldValue = breed.origin,
-                filedName = stringResource(R.string.origin)
-            )
+            breed.group?.let {
+                BreedField(
+                    fieldValue = it,
+                    filedName = stringResource(R.string.group)
+                )
+            }
+
+            breed.origin?.let {
+                BreedField(
+                    fieldValue = it,
+                    filedName = stringResource(R.string.origin)
+                )
+            }
         }
         if(detailType == BreedDetailType.FULL_DETAIL) {
 

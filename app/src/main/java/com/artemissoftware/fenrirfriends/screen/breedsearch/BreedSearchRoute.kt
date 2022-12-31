@@ -7,7 +7,7 @@ import com.artemissoftware.fenrirfriends.navigation.NavigationRoute
 
 object BreedSearchRoute: NavigationRoute<BreedSearchEvents, BreedSearchViewModel> {
 
-    override fun getDestination() = DestinationRoutes.DetailGraph.detailBreed
+    override fun getDestination() = DestinationRoutes.HomeGraph.breadSearch
 
     @Composable
     override fun viewModel(): BreedSearchViewModel = hiltViewModel()

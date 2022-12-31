@@ -3,7 +3,9 @@ package com.artemissoftware.fenrirfriends.screen.gallery
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Create
+import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.graphics.Color
@@ -38,6 +40,7 @@ private fun BuildGalleryScreen(
             FFToolBar(
                 toolbarActions = {
                     ToolbarActions(
+                        galleryViewType = state.viewType,
                         onReorderClicked = {
                             events?.invoke(GalleryEvents.ReorderAlphabetic)
                         },
@@ -78,7 +81,8 @@ private fun BuildGalleryScreen(
 @Composable
 fun RowScope.ToolbarActions(
     onReorderClicked: () -> Unit,
-    onViewClicked: () -> Unit
+    onViewClicked: () -> Unit,
+    galleryViewType: GalleryViewType
 ) {
         FFToolbarAction(
             imageVector = Icons.Filled.MoreVert,
@@ -86,7 +90,7 @@ fun RowScope.ToolbarActions(
             onClicked = { onReorderClicked() }
         )
         FFToolbarAction(
-            imageVector = Icons.Filled.Create,
+            imageVector = if(galleryViewType == GalleryViewType.LIST) Icons.Default.List else Icons.Default.Refresh,
             tint = Color.White,
             onClicked = { onViewClicked() }
         )

@@ -24,7 +24,7 @@ fun FFScaffold(
     modifier: Modifier = Modifier/*.statusBarsPadding()*/,
     ffUiScaffoldState: FFUiScaffoldState? = null,
     isLoading: Boolean = false,
-    @RawRes lottieId: Int = R.raw.lottie_android_icon,
+    @RawRes lottieId: Int = R.raw.lottie_fenris,
     navController: NavHostController? = null,
     bottomBarItems: List<BottomBarItem> = emptyList(),
     content: @Composable (PaddingValues) -> Unit,
