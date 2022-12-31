@@ -21,12 +21,13 @@ import com.artemissoftware.core_ui.composables.text.FFText
 import com.artemissoftware.core_ui.theme.TextNewRodin8
 import com.artemissoftware.domain.models.Breed
 import com.artemissoftware.fenrirfriends.R
+import com.artemissoftware.fenrirfriends.composables.breed.models.BreedDetailType
 
 
 @Composable
 fun BreedCard(
     breed: Breed,
-    showFullDetail: Boolean = false
+    detailType: BreedDetailType = BreedDetailType.BULLET
 ) {
 
     val painter = rememberAsyncImagePainter(
@@ -55,7 +56,7 @@ fun BreedCard(
                 contentScale = ContentScale.Crop,
             )
 
-            BreedDetail(breed = breed, showFullDetail = showFullDetail)
+            BreedDetail(breed = breed, detailType = detailType)
         }
 
     }
@@ -65,6 +66,6 @@ fun BreedCard(
 @Preview(showBackground = true)
 @Composable
 private fun BreedCardPreview() {
-    BreedCard(breed =  Breed.mockBreeds[0], showFullDetail = true)
+    BreedCard(breed =  Breed.mockBreeds[0], detailType = BreedDetailType.BULLET)
 }
 

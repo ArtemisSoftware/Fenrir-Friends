@@ -12,12 +12,13 @@ import com.artemissoftware.core_ui.composables.text.FFText
 import com.artemissoftware.core_ui.theme.TextNewRodin8
 import com.artemissoftware.domain.models.Breed
 import com.artemissoftware.fenrirfriends.R
+import com.artemissoftware.fenrirfriends.composables.breed.models.BreedDetailType
 
 
 @Composable
 fun BreedDetail(
     breed: Breed,
-    showFullDetail: Boolean = false
+    detailType: BreedDetailType
 ) {
     Column(
         modifier = Modifier
@@ -30,7 +31,7 @@ fun BreedDetail(
             filedName = stringResource(R.string.name)
         )
 
-        if(showFullDetail) {
+        if(detailType == BreedDetailType.RESUME || detailType == BreedDetailType.FULL_DETAIL) {
             BreedField(
                 fieldValue = breed.group,
                 filedName = stringResource(R.string.group)
@@ -41,13 +42,20 @@ fun BreedDetail(
                 filedName = stringResource(R.string.origin)
             )
         }
+        if(detailType == BreedDetailType.FULL_DETAIL) {
+
+            BreedField(
+                fieldValue = breed.temperament,
+                filedName = stringResource(R.string.temperament)
+            )
+        }
     }
 }
 
 @Preview(showBackground = true)
 @Composable
 private fun BreedDetailPreview() {
-    BreedDetail(breed =  Breed.mockBreeds[0], showFullDetail = true)
+    BreedDetail(breed =  Breed.mockBreeds[0], detailType = BreedDetailType.FULL_DETAIL)
 }
 
 

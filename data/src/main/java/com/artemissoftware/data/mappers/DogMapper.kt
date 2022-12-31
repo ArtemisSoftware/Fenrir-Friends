@@ -10,7 +10,8 @@ fun BreedDto.toBreed() : Breed{
         url = imageDto.url,
         name = name,
         origin = origin,
-        group = breedGroup
+        group = breedGroup,
+        temperament = temperament
     )
 
 }

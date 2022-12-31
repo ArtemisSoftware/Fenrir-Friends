@@ -50,6 +50,7 @@ class DogMapperTest {
             url = "https://cdn2.thedogapi.com/images/BJa4kxc4X.jpg",
             group = "Toy",
             origin = "Germany, France",
+            temperament = "Stubborn, Curious, Playful, Adventurous, Active, Fun-loving",
         )
 
         assertEquals(breed, breedDto.toBreed())

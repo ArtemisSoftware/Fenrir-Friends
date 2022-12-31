@@ -5,7 +5,8 @@ data class Breed(
     val name: String,
     val url: String,
     val group: String,
-    val origin: String
+    val origin: String,
+    val temperament: String
 ){
 
     companion object{
@@ -17,6 +18,7 @@ data class Breed(
                 url = "https://cdn2.thedogapi.com/images/BJa4kxc4X.jpg",
                 origin = "Germany, France",
                 group = "Killer",
+                temperament = "Stubborn, Curious, Playful, Adventurous, Active, Fun-loving",
             ),
             Breed(
                 id = 2,
@@ -24,6 +26,7 @@ data class Breed(
                 url = "https://cdn2.thedogapi.com/images/_Qf9nfRzL.png",
                 origin = "USA, France",
                 group = "Toy",
+                temperament = "Fun-loving",
             ),
         )
     }
