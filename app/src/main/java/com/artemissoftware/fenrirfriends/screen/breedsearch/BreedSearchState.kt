@@ -1,8 +1,8 @@
-package com.artemissoftware.fenrirfriends.screen.gallery
+package com.artemissoftware.fenrirfriends.screen.breedsearch
 
 import com.artemissoftware.domain.models.Breed
 
-data class GalleryState(
+sealed class BreedSearchState(
     val breeds: List<Breed> = emptyList(),
     val isLoading: Boolean = false,
 )
