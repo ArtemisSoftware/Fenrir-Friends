@@ -11,15 +11,15 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.artemissoftware.core_ui.R
 import com.artemissoftware.core_ui.composables.animations.lottie.FFLottieLoader
 import com.artemissoftware.core_ui.theme.secondaryBackground
 
 @Composable
 fun FFLoading(
     isLoading: Boolean,
-    @RawRes lottieId: Int,
+    @RawRes lottieId: Int = R.raw.lottie_android_icon,
 ) {
 
     AnimatedVisibility(
