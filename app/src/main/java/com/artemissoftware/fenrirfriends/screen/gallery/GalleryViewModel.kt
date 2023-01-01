@@ -38,6 +38,7 @@ class GalleryViewModel @Inject constructor(
                 sendUiEvent(UiEvent.Navigate(DestinationRoutes.DetailGraph.detailBreed.withCustomArgs(event.breed.toUI())))
             }
             is GalleryEvents.ReorderAlphabetic -> {
+                //TODO: falta implementar
                 //--sendUiEvent(UiEvent.Navigate(DestinationRoutes.GalleryGraph.pictures.withCustomArgs(event.breed.toUI())))
             }
             is GalleryEvents.ChangeView -> {
