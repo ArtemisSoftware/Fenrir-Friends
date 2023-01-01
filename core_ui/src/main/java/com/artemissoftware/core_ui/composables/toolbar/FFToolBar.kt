@@ -21,24 +21,11 @@ import com.artemissoftware.core_ui.R
 fun FFToolBar(
     @DrawableRes backgroundId: Int = R.drawable.ic_top_app_bar_bg,
     onBackClicked: (() -> Unit)? = null,
-    toolbarActions: @Composable RowScope.() -> Unit = {},
-    iconTint: Color = Color.Black
+    toolbarActions: @Composable RowScope.(Color) -> Unit = {},
+    iconColor: Color = Color.Black
 ) {
-    Box(
-        modifier = Modifier
-            .wrapContentSize()
-            .fillMaxWidth()
-    ) {
 
-        backgroundId?.let {
-            Image(
-                modifier = Modifier.fillMaxWidth(),
-                painter = painterResource(id = it),
-                contentDescription = "background_image",
-                contentScale = ContentScale.FillBounds
-            )
-        }
-
+    FFTopBar(backgroundId = backgroundId) {
         TopAppBar(
             elevation = 0.dp,
             backgroundColor = Color.Transparent,
@@ -48,12 +35,12 @@ fun FFToolBar(
                     FFToolbarAction(
                         imageVector = Icons.Filled.ArrowBack,
                         onClicked = it,
-                        tint = iconTint
+                        tint = iconColor
                     )
                 }
             },
             actions = {
-                toolbarActions()
+                toolbarActions(iconColor)
             }
         )
     }
@@ -64,8 +51,10 @@ fun FFToolBar(
 private fun FFToolBarPreview() {
 
     FFToolBar(
-        toolbarActions = {
-            FFToolbarAction(imageVector = Icons.Filled.Share)
+        iconColor = Color.Green,
+        onBackClicked = {},
+        toolbarActions = { color->
+            FFToolbarAction(imageVector = Icons.Filled.Share, tint = color)
             FFToolbarAction(imageVector = Icons.Filled.Settings)
         }
     )

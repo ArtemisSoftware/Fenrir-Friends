@@ -38,8 +38,10 @@ private fun BuildGalleryScreen(
         isLoading = state.isLoading,
         toolbar = {
             FFToolBar(
-                toolbarActions = {
+                iconColor = Color.White,
+                toolbarActions = { iconColor->
                     ToolbarActions(
+                        iconColor = iconColor,
                         galleryViewType = state.viewType,
                         onReorderClicked = {
                             events?.invoke(GalleryEvents.ReorderAlphabetic)
@@ -82,16 +84,17 @@ private fun BuildGalleryScreen(
 fun RowScope.ToolbarActions(
     onReorderClicked: () -> Unit,
     onViewClicked: () -> Unit,
-    galleryViewType: GalleryViewType
+    galleryViewType: GalleryViewType,
+    iconColor: Color
 ) {
         FFToolbarAction(
             imageVector = Icons.Filled.MoreVert,
-            tint = Color.White,
+            tint = iconColor,
             onClicked = { onReorderClicked() }
         )
         FFToolbarAction(
             imageVector = if(galleryViewType == GalleryViewType.LIST) Icons.Default.List else Icons.Default.Refresh,
-            tint = Color.White,
+            tint = iconColor,
             onClicked = { onViewClicked() }
         )
 
