@@ -8,5 +8,8 @@ sealed class BreedSearchEvents: FFBaseEvents() {
 
     data class GoToBreedDetail(val breed: Breed) : BreedSearchEvents()
     data class SearchBreed(val query: String) : BreedSearchEvents()
+    object OpenSearch : BreedSearchEvents()
+    object CloseSearch : BreedSearchEvents()
+    data class UpdateSearch(val text: String) : BreedSearchEvents()
 }
 

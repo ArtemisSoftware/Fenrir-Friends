@@ -6,7 +6,7 @@ data class Breed(
     val url: String,
     val group: String? = null,
     val origin: String? = null,
-    val temperament: String
+    val temperament: String? = null
 ){
 
     companion object{

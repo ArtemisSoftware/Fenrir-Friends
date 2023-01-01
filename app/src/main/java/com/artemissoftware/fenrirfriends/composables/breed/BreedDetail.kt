@@ -50,10 +50,12 @@ fun BreedDetail(
         }
         if(detailType == BreedDetailType.FULL_DETAIL) {
 
-            BreedField(
-                fieldValue = breed.temperament,
-                filedName = stringResource(R.string.temperament)
-            )
+            breed.temperament?.let {
+                BreedField(
+                    fieldValue = it,
+                    filedName = stringResource(R.string.temperament)
+                )
+            }
         }
     }
 }

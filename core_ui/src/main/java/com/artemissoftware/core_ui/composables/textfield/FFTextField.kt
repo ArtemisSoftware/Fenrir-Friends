@@ -7,7 +7,10 @@ import androidx.compose.material.TextFieldColors
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
+import com.artemissoftware.core_ui.theme.TextNewRodin
 
 @Composable
 fun FFTextField(
@@ -20,6 +23,7 @@ fun FFTextField(
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions(),
     colors: TextFieldColors = TextFieldDefaults.textFieldColors(),
+    textStyle : TextStyle = TextNewRodin,
     singleLine: Boolean = true
 ) {
 
@@ -29,6 +33,7 @@ fun FFTextField(
         onValueChange = {
             onValueChange(it)
         },
+        textStyle = textStyle,
         placeholder = placeholder,
         singleLine = singleLine,
         leadingIcon = leadingIcon,

@@ -36,7 +36,6 @@ fun FFScaffold(
             .fillMaxSize()
     ) {
 
-        FFConnectivityStatus()
 
         var scaffoldModifier = modifier
             .fillMaxSize()
@@ -47,6 +46,7 @@ fun FFScaffold(
             modifier = scaffoldModifier,
             topBar = {
                 toolbar.invoke()
+
             },
             bottomBar = {
 
@@ -67,6 +67,8 @@ fun FFScaffold(
             content = content
         )
 
+
+        FFConnectivityStatus()
 
         FFLoading(isLoading = isLoading, lottieId = lottieId)
 

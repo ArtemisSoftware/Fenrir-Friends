@@ -3,7 +3,9 @@ package com.artemissoftware.core_ui.composables.toolbar
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.ContentAlpha
@@ -19,6 +21,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.artemissoftware.core_ui.R
 import com.artemissoftware.core_ui.composables.text.FFText
@@ -33,6 +36,7 @@ fun FFSearchToolBar(
     onTextChange: (String) -> Unit,
     onCloseClicked: () -> Unit,
     onSearchClicked: (String) -> Unit,
+    textColor: Color = Color.White,
     iconColor: Color = Color.White
 ) {
 
@@ -40,33 +44,26 @@ fun FFSearchToolBar(
         mutableStateOf(FFToolbarTrailingIconState.DELETE)
     }
 
-    Box(
-        modifier = Modifier
-            .height(80.dp)
-            .fillMaxWidth()
-    ) {
-
-        backgroundId?.let {
-            Image(
-                modifier = Modifier.fillMaxSize(),
-                painter = painterResource(id = it),
-                contentDescription = "",
-                contentScale = ContentScale.FillBounds
-            )
-        }
+    FFTopBar(backgroundId = backgroundId) {
 
         Surface(
             modifier = Modifier
-                .padding(top = 24.dp)
-                .fillMaxSize(),
+                .fillMaxWidth(),
             color = Color.Transparent,
             elevation = 0.dp
         ) {
 
             FFTextField(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier.fillMaxWidth(),
                 value = text,
                 onValueChange = {
+
+                    trailingIconState = if (it.isNotEmpty()) {
+                        FFToolbarTrailingIconState.DELETE
+                    } else {
+                        FFToolbarTrailingIconState.CLOSE
+                    }
+
                     onTextChange(it)
                 },
                 placeholder = {
@@ -94,10 +91,17 @@ fun FFSearchToolBar(
                         imageVector = Icons.Filled.Close,
                         tint = iconColor,
                         onClicked = {
+
                             when (trailingIconState) {
                                 FFToolbarTrailingIconState.DELETE -> {
-                                    onTextChange("")
-                                    trailingIconState = FFToolbarTrailingIconState.CLOSE
+
+                                    if (text.isNotEmpty()) {
+                                        onTextChange("")
+                                    }
+                                    else{
+                                        onCloseClicked()
+                                        trailingIconState = FFToolbarTrailingIconState.CLOSE
+                                    }
                                 }
                                 FFToolbarTrailingIconState.CLOSE -> {
                                     if (text.isNotEmpty()) {
@@ -108,6 +112,7 @@ fun FFSearchToolBar(
                                     }
                                 }
                             }
+
                         }
                     )
 
@@ -121,7 +126,11 @@ fun FFSearchToolBar(
                     }
                 ),
                 colors = TextFieldDefaults.textFieldColors(
-                    cursorColor = Color.White,
+                    placeholderColor = textColor,
+                    textColor = textColor,
+                    cursorColor = textColor,
+                    trailingIconColor = textColor,
+                    leadingIconColor = textColor,
                     focusedIndicatorColor = Color.Transparent,
                     disabledIndicatorColor = Color.Transparent,
                     unfocusedIndicatorColor = Color.Transparent,
@@ -130,7 +139,18 @@ fun FFSearchToolBar(
             )
 
         }
-
     }
 }
 
+@Preview(showBackground = true)
+@Composable
+private fun FFSearchToolBarPreview() {
+
+    FFSearchToolBar(
+        text = "Search text",
+        placeholderTextId = R.string.confirm,
+        onTextChange = {},
+        onCloseClicked = {},
+        onSearchClicked = {}
+    )
+}

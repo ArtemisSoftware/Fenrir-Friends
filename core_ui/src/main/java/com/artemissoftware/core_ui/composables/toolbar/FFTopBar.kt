@@ -9,7 +9,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import com.artemissoftware.core_ui.R
+import com.artemissoftware.core_ui.composables.text.FFText
 
 @Composable
 fun FFTopBar(
@@ -32,5 +34,14 @@ fun FFTopBar(
         }
 
         content.invoke()
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun FFTopBarPreview() {
+
+    FFTopBar {
+        FFText(text = "Example")
     }
 }

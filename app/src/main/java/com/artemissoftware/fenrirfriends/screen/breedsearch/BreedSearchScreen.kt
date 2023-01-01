@@ -11,9 +11,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.artemissoftware.core_ui.composables.scaffold.FFScaffold
 import com.artemissoftware.core_ui.composables.toolbar.FFSearchToolBar
 import com.artemissoftware.core_ui.composables.toolbar.FFToolbarAction
+import com.artemissoftware.core_ui.composables.toolbar.models.FFSearchToolBarState
 import com.artemissoftware.domain.models.Breed
 import com.artemissoftware.fenrirfriends.R
 import com.artemissoftware.fenrirfriends.composables.breed.models.BreedDetailType
+import com.artemissoftware.fenrirfriends.composables.toolbar.SearchToolbar
 import com.artemissoftware.fenrirfriends.screen.gallery.composables.GalleryList
 
 
@@ -24,12 +26,19 @@ fun BreedSearchScreen(
 
     val state = viewModel.state.collectAsState()
 
-    BuildBreedSearchScreen(state = state.value, events = viewModel::onTriggerEvent)
+    BuildBreedSearchScreen(
+        state = state.value,
+        events = viewModel::onTriggerEvent,
+        searchAppBarState = viewModel.searchAppBarState.value,
+        searchText = viewModel.searchTextState.value
+    )
 }
 
 @Composable
 private fun BuildBreedSearchScreen(
     state: BreedSearchState,
+    searchText: String,
+    searchAppBarState: FFSearchToolBarState,
     events: ((BreedSearchEvents) -> Unit)? = null
 ) {
 
@@ -37,18 +46,21 @@ private fun BuildBreedSearchScreen(
         isLoading = state.isLoading,
         toolbar = {
 
-            FFSearchToolBar(
-                text = "",
-                placeholderTextId = R.string.search_by_breed_name,
-                onTextChange = {
-
+            SearchToolbar(
+                iconColor = Color.White,
+                searchAppBarState = searchAppBarState,
+                searchTextState = searchText,
+                onTextChanged = {
+                    events?.invoke(BreedSearchEvents.UpdateSearch(it))
                 },
-                onCloseClicked = { /*TODO*/ },
                 onSearchClicked = {
-
-                }
+                    events?.invoke(BreedSearchEvents.OpenSearch)
+                },
+                onCloseClicked = {
+                    events?.invoke(BreedSearchEvents.CloseSearch)
+                },
+                placeholderTextId = R.string.search_by_breed_name,
             )
-
         },
         content =  {
 
@@ -90,5 +102,5 @@ fun RowScope.ToolbarActions(
 private fun BuildBreedSearchScreenPreview() {
 
     val state = BreedSearchState(breeds = Breed.mockBreeds)
-    BuildBreedSearchScreen(state, events = {})
+    BuildBreedSearchScreen(state, events = {}, searchText = "searchText",searchAppBarState = FFSearchToolBarState.OPENED )
 }
