@@ -4,6 +4,7 @@ import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
@@ -51,7 +52,7 @@ fun FFBottomNavigationBar(
 
                 ffUiScaffoldState?.let {
 
-                    Box(modifier = Modifier) {
+                    Box(modifier = modifier) {
                         Image(
                             modifier = Modifier.fillMaxWidth(),
                             painter = painterResource(id = backgroundId),
@@ -61,7 +62,7 @@ fun FFBottomNavigationBar(
 
                         BottomNavigation(
                             elevation = 0.dp,
-                            modifier = modifier,
+                            modifier = Modifier,
                             backgroundColor = Color.Transparent,
                         ) {
 
