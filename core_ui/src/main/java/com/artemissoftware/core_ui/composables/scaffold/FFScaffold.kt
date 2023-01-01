@@ -46,7 +46,6 @@ fun FFScaffold(
             modifier = scaffoldModifier,
             topBar = {
                 toolbar.invoke()
-
             },
             bottomBar = {
 

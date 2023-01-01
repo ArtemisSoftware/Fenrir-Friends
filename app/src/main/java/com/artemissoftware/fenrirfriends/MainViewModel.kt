@@ -1,6 +1,7 @@
 package com.artemissoftware.fenrirfriends
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Place
 import androidx.compose.material.icons.filled.Search
 import com.artemissoftware.core_ui.composables.scaffold.FFUiScaffoldState
@@ -45,7 +46,7 @@ class MainViewModel @Inject constructor(): FFBaseEventViewModel<MainEvents>() {
                         bottomBarItems.add(
                             gallery.toBottomBarItem(
                                 title = R.string.gallery,
-                                icon = Icons.Default.Place
+                                icon = Icons.Default.Home
                             )
                         )
                     }
