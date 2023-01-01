@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -43,6 +44,9 @@ dependencies {
     api rootProject.libraries.okhttp
     api rootProject.libraries.okhttpLoggingInterceptor
 
+    implementation rootProject.libraries.roomRuntime
+    kapt rootProject.libraries.roomCompiler
+    implementation rootProject.libraries.roomKtx
 
     implementation rootProject.libraries.dagger
 
