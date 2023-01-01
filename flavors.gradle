@@ -9,6 +9,7 @@ ext.flavorConfig = { // 1
             buildConfigField "int", "ITEMS_PER_PAGE", "12"
             buildConfigField "long", "READ_TIMEOUT", "15L"
             buildConfigField "long", "CONNECT_TIMEOUT", "15L"
+            buildConfigField "long", "SEARCH_DELAY", "1500"
             buildConfigField("String", "BASE_URL", "\"https://api.thedogapi.com\"")
         }
 
@@ -19,6 +20,7 @@ ext.flavorConfig = { // 1
             buildConfigField "int", "ITEMS_PER_PAGE", "10"
             buildConfigField "long", "READ_TIMEOUT", "15L"
             buildConfigField "long", "CONNECT_TIMEOUT", "15L"
+            buildConfigField "long", "SEARCH_DELAY", "1100"
             buildConfigField("String", "BASE_URL", "\"https://api.thedogapi.com\"")
         }
     }

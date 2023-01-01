@@ -8,6 +8,7 @@ import com.artemissoftware.data.remote.source.DogApiSource
 import com.artemissoftware.domain.models.Breed
 import com.artemissoftware.domain.models.data.DataResponse
 import com.artemissoftware.domain.repositories.BreedRepository
+import java.util.*
 import javax.inject.Inject
 
 class BreedRepositoryImpl @Inject constructor(
@@ -34,7 +35,7 @@ class BreedRepositoryImpl @Inject constructor(
         return try {
 
             val apiResponse = safeApiCall { dogApiSource.getBreeds() }
-                .filter { breedDto -> breedDto.name.contains(query) }
+                .filter { breedDto -> breedDto.name.uppercase(Locale.ROOT).contains(query.uppercase(Locale.ROOT)) }
 
             return DataResponse(data = apiResponse.map { response ->
                 response.toBreed()
