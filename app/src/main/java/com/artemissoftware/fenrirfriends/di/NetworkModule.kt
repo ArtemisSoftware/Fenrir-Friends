@@ -1,6 +1,7 @@
 package com.artemissoftware.fenrirfriends.di
 
 import android.os.Build
+import com.artemissoftware.data.dabase.FenrirDatabase
 import com.artemissoftware.data.remote.DogApi
 import com.artemissoftware.data.remote.source.DogApiSource
 import com.artemissoftware.data.remote.source.DogApiSourceImpl
@@ -19,7 +20,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
-
 
     @Singleton
     @Provides

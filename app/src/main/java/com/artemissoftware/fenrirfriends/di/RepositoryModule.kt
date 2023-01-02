@@ -1,5 +1,6 @@
 package com.artemissoftware.fenrirfriends.di
 
+import com.artemissoftware.data.dabase.FenrirDatabase
 import com.artemissoftware.data.remote.source.DogApiSource
 import com.artemissoftware.data.repositories.BreedRepositoryImpl
 import com.artemissoftware.domain.repositories.BreedRepository
@@ -15,7 +16,7 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideBreedRepository(dogApiSource: DogApiSource): BreedRepository {
-        return BreedRepositoryImpl(dogApiSource)
+    fun provideBreedRepository(dogApiSource: DogApiSource, fenrirDatabase: FenrirDatabase): BreedRepository {
+        return BreedRepositoryImpl(dogApiSource, fenrirDatabase)
     }
 }
