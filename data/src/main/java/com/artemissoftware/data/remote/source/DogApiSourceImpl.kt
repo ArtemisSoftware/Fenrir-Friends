@@ -5,7 +5,9 @@ import com.artemissoftware.data.remote.HandleApi
 import com.artemissoftware.data.remote.dto.BreedDto
 import javax.inject.Inject
 
-class DogApiSourceImpl @Inject constructor (private val dogApi: DogApi): DogApiSource {
+class DogApiSourceImpl @Inject constructor (
+    private val dogApi: DogApi
+): DogApiSource {
 
     override suspend fun getBreeds(): List<BreedDto> {
         return HandleApi.safeApiCall { dogApi.getBreeds() }

@@ -1,5 +1,6 @@
 package com.artemissoftware.data.dabase.dao
 
+import androidx.paging.PagingSource
 import androidx.room.*
 import com.artemissoftware.data.dabase.entities.BreedEntity
 import kotlinx.coroutines.flow.Flow
@@ -15,4 +16,10 @@ interface BreedDao {
 
     @Query("SELECT * FROM breedentity")
     fun getBreeds(): Flow<List<BreedEntity>>
+
+    @Query("SELECT * FROM breedentity ORDER BY id ASC")
+    fun getAllHeroes(): PagingSource<Int, BreedEntity>
+
+    @Query("DELETE FROM breedentity")
+    suspend fun deleteBreeds()
 }

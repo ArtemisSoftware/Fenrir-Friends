@@ -13,8 +13,11 @@ interface BreedRemoteKeysDao {
     @Query("SELECT * FROM breedremotekeysentity WHERE id =:breedId")
     suspend fun getRemoteKeys(breedId: Int): BreedRemoteKeysEntity?
 
+    @Query("SELECT * FROM breedremotekeysentity ORDER BY lastUpdated ASC LIMIT 1")
+    suspend fun getRemoteKeys(): BreedRemoteKeysEntity?
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun addAllRemoteKeys(heroRemoteKeys: List<BreedRemoteKeysEntity>)
+    suspend fun addAllRemoteKeys(breedRemoteKeys: List<BreedRemoteKeysEntity>)
 
     @Query("DELETE FROM breedremotekeysentity")
     suspend fun deleteAllRemoteKeys()
