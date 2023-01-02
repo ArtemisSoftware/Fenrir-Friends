@@ -39,8 +39,12 @@ ext.versions = [
 
         navigationCompose       : '2.5.3',
 
+        pagingCompose           : "1.0.0-alpha17",
+        pagingCommon            : "3.2.0-alpha03",
+
         retrofit                : '2.9.0',
         room                    : '2.4.3',
+
         okhttp                  : '5.0.0-alpha.11',
 
         junit                   : '4.13.2',
@@ -84,7 +88,10 @@ ext.libraries = [
         roomRuntime                     : "androidx.room:room-runtime:$versions.room",
         roomCompiler                    : "androidx.room:room-compiler:$versions.room",
         roomKtx                         : "androidx.room:room-ktx:$versions.room",
+        roomPaging                      : "androidx.room:room-paging:$versions.room",
 
+        pagingCompose                   : "androidx.paging:paging-compose:$versions.pagingCompose",
+        pagingCommon                    : "androidx.paging:paging-common:$versions.pagingCommon",
 ]
 
 ext.tests = [
