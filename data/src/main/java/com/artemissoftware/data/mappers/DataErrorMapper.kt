@@ -4,6 +4,6 @@ import com.artemissoftware.data.errors.FenrisFriendsNetworkException
 import com.artemissoftware.domain.models.data.DataError
 
 fun FenrisFriendsNetworkException.toDataError() = DataError(
-    code =  this.code ?: -1,
-    message = this.message
+    code =  this.code,
+    message = this.message ?: ""
 )

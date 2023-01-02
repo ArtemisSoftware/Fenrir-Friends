@@ -1,9 +1,11 @@
 package com.artemissoftware.data.remote
 
 import com.artemissoftware.data.errors.FenrisFriendsNetworkException
+import com.artemissoftware.data.errors.NetworkErrors
 import com.artemissoftware.data.remote.dto.DogApiErrorDto
 import com.google.gson.Gson
 import retrofit2.HttpException
+import java.net.UnknownHostException
 
 object HandleApi {
 
@@ -18,13 +20,16 @@ object HandleApi {
                 is HttpException -> {
 
                     convertErrorBody(ex)?.let { error ->
-                        throw FenrisFriendsNetworkException(code = UNKNOWN_API_ERROR_CODE, message = error.message)
+                        throw FenrisFriendsNetworkException(code = ex.code(), message = error.message)
                     } ?: run {
                         throw ex
                     }
 
                 }
-                else -> throw FenrisFriendsNetworkException(code = GENERIC_API_ERROR_CODE, message = UNKNOWN_ERROR_MESSAGE)
+                is UnknownHostException ->{
+                    throw FenrisFriendsNetworkException(code = NetworkErrors.UNKNOWN_HOST.first, message = ex.message)
+                }
+                else -> throw FenrisFriendsNetworkException(code = NetworkErrors.GENERIC_API_ERROR.first, message = NetworkErrors.GENERIC_API_ERROR.second)
             }
         }
     }
@@ -39,8 +44,4 @@ object HandleApi {
             null
         }
     }
-
-    private const val UNKNOWN_API_ERROR_CODE = -1
-    private const val GENERIC_API_ERROR_CODE = -2
-    private const val UNKNOWN_ERROR_MESSAGE = "An error has occurred"
 }
