@@ -1,5 +1,6 @@
 package com.artemissoftware.data.mappers
 
+import com.artemissoftware.data.dabase.entities.BreedEntity
 import com.artemissoftware.data.remote.dto.BreedDto
 import com.artemissoftware.data.remote.dto.HeightDto
 import com.artemissoftware.data.remote.dto.ImageDto
@@ -12,6 +13,83 @@ class DogMapperTest {
 
     @Test
     fun `map BreedDto to Breed`() {
+
+        val breedDto = getBreedDto()
+
+        val breed = Breed(
+            id = 1 ,
+            name = "Affenpinscher",
+            url = "https://cdn2.thedogapi.com/images/BJa4kxc4X.jpg",
+            group = "Toy",
+            origin = "Germany, France",
+            temperament = "Stubborn, Curious, Playful, Adventurous, Active, Fun-loving",
+        )
+
+        assertEquals(breed, breedDto.toBreed())
+    }
+
+    @Test
+    fun `map BreedDto to BreedEntity`() {
+
+        val breedDto = getBreedDto()
+
+        val breedEntity = BreedEntity(
+            id = 1 ,
+            name = "Affenpinscher",
+            url = "https://cdn2.thedogapi.com/images/BJa4kxc4X.jpg",
+            group = "Toy",
+            origin = "Germany, France",
+            temperament = "Stubborn, Curious, Playful, Adventurous, Active, Fun-loving",
+        )
+
+        assertEquals(breedEntity, breedDto.toEntity())
+    }
+
+    @Test
+    fun `map BreedDto list to BreedEntity list`() {
+
+        val listBreedDto = listOf(getBreedDto())
+
+        val breedEntity = BreedEntity(
+            id = 1 ,
+            name = "Affenpinscher",
+            url = "https://cdn2.thedogapi.com/images/BJa4kxc4X.jpg",
+            group = "Toy",
+            origin = "Germany, France",
+            temperament = "Stubborn, Curious, Playful, Adventurous, Active, Fun-loving",
+        )
+
+        val listBreedEntity = listOf(breedEntity)
+
+        assertEquals(listBreedEntity, listBreedDto.toEntity())
+    }
+
+
+    @Test
+    fun `map BreedEntity to Breed`() {
+
+        val breedEntity = BreedEntity(
+            id = 1 ,
+            name = "Affenpinscher",
+            url = "https://cdn2.thedogapi.com/images/BJa4kxc4X.jpg",
+            group = "Toy",
+            origin = "Germany, France",
+            temperament = "Stubborn, Curious, Playful, Adventurous, Active, Fun-loving",
+        )
+
+        val breed = Breed(
+            id = 1 ,
+            name = "Affenpinscher",
+            url = "https://cdn2.thedogapi.com/images/BJa4kxc4X.jpg",
+            group = "Toy",
+            origin = "Germany, France",
+            temperament = "Stubborn, Curious, Playful, Adventurous, Active, Fun-loving",
+        )
+
+        assertEquals(breed, breedEntity.toBreed())
+    }
+
+    private fun getBreedDto() : BreedDto {
 
         val weightDto = WeightDto(
             imperial = "6 - 13",
@@ -44,16 +122,6 @@ class DogMapperTest {
             weightDto = weightDto
         )
 
-        val breed = Breed(
-            id = 1 ,
-            name = "Affenpinscher",
-            url = "https://cdn2.thedogapi.com/images/BJa4kxc4X.jpg",
-            group = "Toy",
-            origin = "Germany, France",
-            temperament = "Stubborn, Curious, Playful, Adventurous, Active, Fun-loving",
-        )
-
-        assertEquals(breed, breedDto.toBreed())
+        return breedDto
     }
-
 }
