@@ -75,7 +75,9 @@ dependencies {
     debugImplementation rootProject.libraries.composeUiTooling
     debugImplementation rootProject.tests.uiTestManifest
 
+
     implementation project(":data")
     implementation project(":domain")
     implementation project(':core_ui')
+
 }

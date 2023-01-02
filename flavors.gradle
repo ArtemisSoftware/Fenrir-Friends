@@ -6,10 +6,11 @@ ext.flavorConfig = { // 1
             dimension "env"
             resValue "string", "app_name", "Dev - Fenrir Friends"
 
-            buildConfigField "int", "ITEMS_PER_PAGE", "12"
+            buildConfigField "int", "ITEMS_PER_PAGE", "8"
             buildConfigField "long", "READ_TIMEOUT", "15L"
             buildConfigField "long", "CONNECT_TIMEOUT", "15L"
             buildConfigField "long", "SEARCH_DELAY", "1500"
+            buildConfigField "int", "CACHE_TIME_OUT", "600" //in minutes
             buildConfigField("String", "BASE_URL", "\"https://api.thedogapi.com\"")
         }
 
@@ -17,10 +18,11 @@ ext.flavorConfig = { // 1
             dimension "env"
             resValue "string", "app_name", "Fenrir Friends"
 
-            buildConfigField "int", "ITEMS_PER_PAGE", "10"
+            buildConfigField "int", "ITEMS_PER_PAGE", "16"
             buildConfigField "long", "READ_TIMEOUT", "15L"
             buildConfigField "long", "CONNECT_TIMEOUT", "15L"
             buildConfigField "long", "SEARCH_DELAY", "1100"
+            buildConfigField "int", "CACHE_TIME_OUT", "1440" //in minutes
             buildConfigField("String", "BASE_URL", "\"https://api.thedogapi.com\"")
         }
     }
