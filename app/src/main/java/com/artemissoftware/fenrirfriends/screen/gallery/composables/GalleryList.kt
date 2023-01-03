@@ -5,13 +5,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.items
 import com.artemissoftware.domain.models.Breed
+import com.artemissoftware.fenrirfriends.composables.breed.BreedCard
 import com.artemissoftware.fenrirfriends.composables.breed.models.BreedDetailType
 
 @Composable

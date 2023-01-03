@@ -1,4 +1,4 @@
-package com.artemissoftware.fenrirfriends.screen.gallery.composables
+package com.artemissoftware.fenrirfriends.composables.breed
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -10,18 +10,16 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import coil.size.Size
 import com.artemissoftware.core_ui.composables.card.FFCard
-import com.artemissoftware.core_ui.composables.text.FFText
-import com.artemissoftware.core_ui.theme.TextNewRodin8
 import com.artemissoftware.domain.models.Breed
 import com.artemissoftware.fenrirfriends.R
 import com.artemissoftware.fenrirfriends.composables.breed.models.BreedDetailType
+import com.artemissoftware.fenrirfriends.screen.gallery.composables.BreedDetail
 
 
 @Composable
@@ -36,6 +34,8 @@ fun BreedCard(
             .data(breed.url)
             .size(Size.ORIGINAL)
             .crossfade(500)
+            .error(R.drawable.ic_error)
+            .placeholder(R.drawable.ic_fenrir_placeholder)
             .build()
     )
 
