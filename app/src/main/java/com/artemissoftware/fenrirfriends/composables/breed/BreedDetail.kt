@@ -34,28 +34,24 @@ fun BreedDetail(
 
         if(detailType == BreedDetailType.RESUME || detailType == BreedDetailType.FULL_DETAIL) {
 
-            breed.group?.let {
-                BreedField(
-                    fieldValue = it,
-                    filedName = stringResource(R.string.group)
-                )
-            }
+            BreedField(
+                fieldValue = breed.group,
+                filedName = stringResource(R.string.group)
+            )
 
-            breed.origin?.let {
-                BreedField(
-                    fieldValue = it,
-                    filedName = stringResource(R.string.origin)
-                )
-            }
+            BreedField(
+                fieldValue = breed.origin,
+                filedName = stringResource(R.string.origin)
+            )
         }
+
         if(detailType == BreedDetailType.FULL_DETAIL) {
 
-            breed.temperament?.let {
-                BreedField(
-                    fieldValue = it,
-                    filedName = stringResource(R.string.temperament)
-                )
-            }
+            BreedField(
+                fieldValue = breed.temperament,
+                filedName = stringResource(R.string.temperament)
+            )
+
         }
     }
 }
@@ -70,23 +66,31 @@ private fun BreedDetailPreview() {
 @Composable
 private fun BreedField(
     filedName: String,
-    fieldValue: String
+    fieldValue: String? = null
 ) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(2.dp)
-    ) {
-        FFText(
-            text = filedName,
-            style = TextNewRodin8
-        )
 
-        FFText(
-            text = fieldValue
-        )
+    fieldValue?.let {
 
+        if (it.isNotBlank()) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(2.dp)
+            ) {
+                FFText(
+                    text = filedName,
+                    style = TextNewRodin8
+                )
+
+                FFText(
+                    text = it
+                )
+
+            }
+        }
     }
+
+
 }
 
 
