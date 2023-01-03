@@ -24,9 +24,10 @@ import com.artemissoftware.core_ui.composables.dialog.FFDialog
 import com.artemissoftware.core_ui.composables.loading.FFLoading
 import com.artemissoftware.core_ui.composables.navigationbar.FFBottomNavigationBar
 import com.artemissoftware.core_ui.navigation.models.BottomBarItem
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlin.math.roundToInt
 
-@OptIn(ExperimentalAnimationApi::class)
+@OptIn(ExperimentalAnimationApi::class, ExperimentalCoroutinesApi::class)
 @Composable
 fun FFScaffold(
     modifier: Modifier = Modifier/*.statusBarsPadding()*/,
@@ -65,7 +66,7 @@ fun FFScaffold(
     ) {
 
 
-        var scaffoldModifier = modifier
+        val scaffoldModifier = modifier
             .fillMaxSize()
             .background(Color.White)
 

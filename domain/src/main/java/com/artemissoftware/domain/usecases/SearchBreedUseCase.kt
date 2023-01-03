@@ -1,5 +1,6 @@
 package com.artemissoftware.domain.usecases
 
+import androidx.paging.PagingData
 import com.artemissoftware.domain.Resource
 import com.artemissoftware.domain.models.Breed
 import com.artemissoftware.domain.repositories.BreedRepository
@@ -10,20 +11,5 @@ import javax.inject.Inject
 
 class SearchBreedUseCase @Inject constructor(private val breedRepository: BreedRepository) {
 
-    operator fun invoke(query: String): Flow<Resource<List<Breed>>> = flow {
-
-        emit(Resource.Loading())
-
-        delay(1000)
-
-        val result = breedRepository.searchBreed(query = query)
-
-        result.data?.let { breeds->
-            emit(Resource.Success(data = breeds))
-        } ?: kotlin.run {
-            emit(Resource.Error(message = result.error.message))
-        }
-
-    }
-
+    operator fun invoke(query: String): Flow<PagingData<Breed>> = breedRepository.searchBreeds(query = query)
 }
