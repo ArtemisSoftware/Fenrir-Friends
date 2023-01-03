@@ -32,6 +32,7 @@ fun FFScaffold(
     modifier: Modifier = Modifier/*.statusBarsPadding()*/,
     ffUiScaffoldState: FFUiScaffoldState? = null,
     isLoading: Boolean = false,
+    showConnectivityStatus: Boolean = true,
     @RawRes lottieId: Int = R.raw.lottie_fenris,
     navController: NavHostController? = null,
     bottomBarItems: List<BottomBarItem> = emptyList(),
@@ -72,7 +73,11 @@ fun FFScaffold(
         Scaffold(
             modifier = scaffoldModifier,
             topBar = {
-                toolbar.invoke()
+                Column {
+                    toolbar.invoke()
+                    if(showConnectivityStatus) FFConnectivityStatus()
+                }
+
             },
             bottomBar = {
 
@@ -98,7 +103,6 @@ fun FFScaffold(
         )
 
 
-        FFConnectivityStatus()
 
         FFLoading(isLoading = isLoading, lottieId = lottieId)
 
