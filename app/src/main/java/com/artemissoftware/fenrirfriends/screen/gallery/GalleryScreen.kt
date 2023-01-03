@@ -1,8 +1,8 @@
 package com.artemissoftware.fenrirfriends.screen.gallery
 
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Refresh
@@ -10,12 +10,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.collectAsLazyPagingItems
 import com.artemissoftware.core_ui.composables.scaffold.FFScaffold
 import com.artemissoftware.core_ui.composables.toolbar.FFToolBar
 import com.artemissoftware.core_ui.composables.toolbar.FFToolbarAction
 import com.artemissoftware.domain.models.Breed
-import com.artemissoftware.fenrirfriends.screen.gallery.composables.GalleryGrid
-import com.artemissoftware.fenrirfriends.screen.gallery.composables.GalleryList
+import com.artemissoftware.fenrirfriends.composables.paging.HandlePagingResult_
+import com.artemissoftware.fenrirfriends.screen.gallery.composables.BreedGallery
 import com.artemissoftware.fenrirfriends.screen.gallery.models.GalleryViewType
 
 @Composable
@@ -24,14 +26,48 @@ fun GalleryScreen(
 ) {
 
     val state = viewModel.state.collectAsState()
+    val breeds: LazyPagingItems<Breed> = viewModel.breeds.collectAsLazyPagingItems()
 
-    BuildGalleryScreen(state = state.value, events = viewModel::onTriggerEvent)
+    BuildGalleryScreen(
+        state = state.value,
+        events = viewModel::onTriggerEvent,
+        pagingItems = breeds
+    )
+
+
+/*
+    Scaffold(
+
+        content = {
+            val result = HandlePagingResult(heroes = allHeroes)
+
+            if (result) {
+                LazyColumn(
+                    
+                ) {
+                    items(
+                        items = allHeroes,
+                        key = { hero ->
+                            hero.id
+                        }
+                    ) { hero ->
+                        hero?.let {
+                            FFText(text = hero.name)
+                        }
+                    }
+                }
+            }
+        }
+    )
+*/
+//
 }
 
 @Composable
 private fun BuildGalleryScreen(
     state: GalleryState,
-    events: ((GalleryEvents) -> Unit)? = null
+    events: ((GalleryEvents) -> Unit)? = null,
+    pagingItems: LazyPagingItems<Breed>
 ) {
 
     FFScaffold(
@@ -55,30 +91,32 @@ private fun BuildGalleryScreen(
         },
         content =  {
 
-            when(state.viewType){
-                GalleryViewType.LIST -> {
-                    GalleryList(
-                        breeds = state.breeds,
-                        onItemClick = {
-                            events?.invoke(GalleryEvents.GoToBreedDetail(it))
-                        }
+            HandlePagingResult_(
+                items = pagingItems,
+                loading = {
+                    events?.invoke(GalleryEvents.ShowLoading(it))
+                },
+                content = {
+                    BreedGallery(
+                        pagingItems = pagingItems,
+                        state = state,
+                        events = events,
                     )
+                },
+                errorContent = {
+                    events?.invoke(GalleryEvents.Reload(it, { pagingItems.refresh() }))
                 }
-                GalleryViewType.GRID -> {
-                    GalleryGrid(
-                        breeds = state.breeds,
-                        onItemClick = {
-                            events?.invoke(GalleryEvents.GoToBreedDetail(it))
-                        }
-                    )
-                }
-            }
+
+            )
+
+
+
 
         }
     )
 }
 
-
+fun LazyListState.isScrolledToTheEnd() = layoutInfo.visibleItemsInfo.lastOrNull()?.index == layoutInfo.totalItemsCount - 1
 
 @Composable
 fun RowScope.ToolbarActions(
@@ -101,10 +139,12 @@ fun RowScope.ToolbarActions(
 }
 
 
+
+
 @Preview(showBackground = true)
 @Composable
 private fun BuildGalleryScreenPreview() {
 
-    val state = GalleryState(breeds = Breed.mockBreeds)
-    BuildGalleryScreen(state, events = {})
+    //val state = GalleryState(breeds = Breed.mockBreeds)
+    //BuildGalleryScreen(state, events = {}, allHeroes)
 }

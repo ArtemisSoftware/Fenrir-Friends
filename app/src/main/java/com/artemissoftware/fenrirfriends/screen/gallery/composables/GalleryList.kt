@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -46,7 +47,10 @@ fun GalleryList(
     onItemClick: (Breed) -> Unit,
     detailType: BreedDetailType = BreedDetailType.BULLET
 ){
+    val state = rememberLazyListState(6)
+
     LazyColumn(
+        state = state,
         modifier = Modifier
             .fillMaxWidth()
             .padding(4.dp),

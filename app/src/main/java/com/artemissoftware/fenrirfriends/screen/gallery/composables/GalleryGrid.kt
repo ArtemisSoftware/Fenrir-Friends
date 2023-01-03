@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
+import androidx.compose.foundation.lazy.staggeredgrid.rememberLazyStaggeredGridState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
@@ -12,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.LazyPagingItems
 import com.artemissoftware.core_ui.composables.grid.FFStaggeredVerticalGrid
+import com.artemissoftware.core_ui.composables.text.FFText
 import com.artemissoftware.domain.models.Breed
 import com.artemissoftware.fenrirfriends.composables.breed.BreedCard
 import com.artemissoftware.fenrirfriends.composables.breed.models.BreedDetailType
@@ -54,9 +56,11 @@ fun GalleryGrid(
     onItemClick: (Breed) -> Unit,
     detailType: BreedDetailType = BreedDetailType.BULLET
 ){
+    val state = rememberLazyStaggeredGridState()
 
     LazyVerticalStaggeredGrid(
         columns = StaggeredGridCells.Fixed(2),
+        state = state
     ) {
         items(breeds.itemCount)
         { index ->

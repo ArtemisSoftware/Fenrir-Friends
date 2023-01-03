@@ -2,11 +2,13 @@ package com.artemissoftware.data.repositories
 
 import androidx.paging.*
 import com.artemissoftware.data.BuildConfig
+import com.artemissoftware.data.BuildConfig.ITEMS_PER_PAGE
 import com.artemissoftware.data.dabase.FenrirDatabase
 import com.artemissoftware.data.errors.FenrisFriendsNetworkException
 import com.artemissoftware.data.mappers.toBreed
 import com.artemissoftware.data.mappers.toDataError
 import com.artemissoftware.data.pagination.BreedRemoteMediator
+import com.artemissoftware.data.pagination.BreedSearchPagingSource
 import com.artemissoftware.data.remote.HandleApi.safeApiCall
 import com.artemissoftware.data.remote.source.DogApiSource
 import com.artemissoftware.domain.models.Breed
@@ -70,6 +72,20 @@ class BreedRepositoryImpl @Inject constructor(
         ).flow.map { pagingData ->
             pagingData.map { breedEntity->
                 breedEntity.toBreed()
+            }
+        }
+    }
+
+    override fun searchBreeds(query: String): Flow<PagingData<Breed>> {
+
+        val pagingSourceFactory = { BreedSearchPagingSource(dogApi = dogApiSource, query = query) }
+
+        return Pager(
+            config = PagingConfig(pageSize = ITEMS_PER_PAGE),
+            pagingSourceFactory = pagingSourceFactory
+        ).flow.map { pagingData ->
+            pagingData.map { breedDto->
+                breedDto.toBreed()
             }
         }
     }
