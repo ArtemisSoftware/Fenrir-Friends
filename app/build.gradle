@@ -66,7 +66,7 @@ dependencies {
     implementation rootProject.libraries.hiltAndroid
     kapt rootProject.libraries.hiltAndroidCompiler
     implementation rootProject.libraries.hiltNavigationCompose
-
+    implementation rootProject.libraries.foundation
 
     testImplementation rootProject.tests.junit
     androidTestImplementation rootProject.tests.junitExtension

@@ -6,7 +6,7 @@ ext.flavorConfig = { // 1
             dimension "env"
             resValue "string", "app_name", "Dev - Fenrir Friends"
 
-            buildConfigField "int", "ITEMS_PER_PAGE", "8"
+            buildConfigField "int", "ITEMS_PER_PAGE", "28"
             buildConfigField "long", "READ_TIMEOUT", "15L"
             buildConfigField "long", "CONNECT_TIMEOUT", "15L"
             buildConfigField "long", "SEARCH_DELAY", "1500"
