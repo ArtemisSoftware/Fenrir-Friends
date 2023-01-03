@@ -78,7 +78,7 @@ private fun BreedDetailScreen(
                 )
 
 
-                scaffold.expandBottomSheet()
+                scaffold.expandBottomSheet(600)
 
             }
         },
@@ -95,7 +95,7 @@ private fun ImageDisplay(breed: Breed?) {
         model = ImageRequest.Builder(LocalContext.current)
             .data(breed?.url)
             .size(Size.ORIGINAL)
-            .error(R.drawable.ic_error)
+            .error(R.drawable.ic_fenrir_placeholder)
             .placeholder(R.drawable.ic_fenrir_placeholder)
             .build()
     )

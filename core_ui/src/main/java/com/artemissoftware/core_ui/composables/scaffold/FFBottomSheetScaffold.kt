@@ -12,6 +12,7 @@ import com.artemissoftware.core_ui.composables.connectivity.FFConnectivityStatus
 import com.artemissoftware.core_ui.composables.dialog.FFDialog
 import com.artemissoftware.core_ui.composables.indicator.FFIndicator
 import com.artemissoftware.core_ui.composables.loading.FFLoading
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 
@@ -59,6 +60,9 @@ fun FFBottomSheetScaffold(
 
         ffUiScaffoldState?.let {
             coroutineScope.launch {
+
+                delay(it.bottomSheetDelay)
+
                 if(it.bottomSheet.value) scaffoldState.bottomSheetState.expand() else scaffoldState.bottomSheetState.collapse()
             }
         }

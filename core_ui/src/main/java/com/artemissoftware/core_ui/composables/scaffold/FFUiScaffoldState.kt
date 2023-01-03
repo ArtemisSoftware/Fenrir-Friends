@@ -28,7 +28,8 @@ open class FFUiScaffoldState(
     var bottomSheet = mutableStateOf<Boolean>(false)
         private set
 
-
+    var bottomSheetDelay = 0L
+        private set
 
     fun showDialog(dialogType: FFDialogType) {
         dialog.value = dialogType
@@ -38,11 +39,13 @@ open class FFUiScaffoldState(
         dialog.value = null
     }
 
-    fun expandBottomSheet() {
+    fun expandBottomSheet(bottomSheetDelay: Long? = null) {
+        this.bottomSheetDelay = bottomSheetDelay ?: 0
         bottomSheet.value = true
     }
 
-    fun collapseBottomSheet() {
+    fun collapseBottomSheet(bottomSheetDelay: Long? = null) {
+        this.bottomSheetDelay = bottomSheetDelay ?: 0
         bottomSheet.value = true
     }
 

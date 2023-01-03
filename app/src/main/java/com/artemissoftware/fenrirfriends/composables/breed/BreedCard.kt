@@ -34,7 +34,7 @@ fun BreedCard(
             .data(breed.url)
             .size(Size.ORIGINAL)
             .crossfade(500)
-            .error(R.drawable.ic_error)
+            .error(R.drawable.ic_fenrir_placeholder)
             .placeholder(R.drawable.ic_fenrir_placeholder)
             .build()
     )
