@@ -66,7 +66,7 @@ class BreedRemoteMediator (
                 }
             }
 
-            val response = dogApi.getBreeds(limit = ITEMS_PER_PAGE, page = page)
+            val response = dogApi.getBreeds(limit = ITEMS_PER_PAGE, page = page - 1)
             val endOfPaginationReached = response.isEmpty()
 
             val prevPage = if (page == 1) null else page - 1
