@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -14,14 +16,18 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import coil.size.Size
 import com.artemissoftware.core_ui.composables.scaffold.FFBottomSheetScaffold
+import com.artemissoftware.core_ui.composables.scaffold.FFUiScaffoldState
 import com.artemissoftware.core_ui.composables.toolbar.FFToolBar
 import com.artemissoftware.domain.models.Breed
+import com.artemissoftware.fenrirfriends.R
 import com.artemissoftware.fenrirfriends.composables.breed.models.BreedDetailType
 import com.artemissoftware.fenrirfriends.screen.gallery.composables.BreedDetail
+import kotlinx.coroutines.launch
 
 
 @Composable
@@ -31,9 +37,12 @@ fun BreedDetailScreen(
 
     val state = viewModel.state.collectAsState()
 
+    val scaffold = remember { FFUiScaffoldState() }
+
     BreedDetailScreen(
         state = state.value,
-        events = viewModel::onTriggerEvent
+        events = viewModel::onTriggerEvent,
+        scaffold = scaffold
     )
 }
 
@@ -41,10 +50,12 @@ fun BreedDetailScreen(
 @Composable
 private fun BreedDetailScreen(
     state: BreedDetailState,
-    events: ((BreedDetailEvents) -> Unit)? = null
+    events: ((BreedDetailEvents) -> Unit)? = null,
+    scaffold: FFUiScaffoldState
 ) {
 
     FFBottomSheetScaffold(
+        ffUiScaffoldState = scaffold,
         isLoading = state.isLoading,
         toolbar = {
             FFToolBar(
@@ -65,6 +76,10 @@ private fun BreedDetailScreen(
                     breed = it,
                     detailType = BreedDetailType.FULL_DETAIL
                 )
+
+
+                scaffold.expandBottomSheet()
+
             }
         },
         content = {
@@ -80,12 +95,14 @@ private fun ImageDisplay(breed: Breed?) {
         model = ImageRequest.Builder(LocalContext.current)
             .data(breed?.url)
             .size(Size.ORIGINAL)
+            .error(R.drawable.ic_error)
+            .placeholder(R.drawable.ic_fenrir_placeholder)
             .build()
     )
 
     Box(modifier = Modifier
         .fillMaxSize()
-        .background(Color.Black)
+        .background(if(painter.state  is AsyncImagePainter.State.Error) Color.LightGray else Color.Black)
     ){
 
         Image(
@@ -109,6 +126,6 @@ private fun ImageDisplay(breed: Breed?) {
 @Composable
 private fun BuildPictureDetailScreenPreview() {
 
-    val state = BreedDetailState(breed = Breed.mockBreeds[0], isLoading = false)
-    BreedDetailScreen(state = state)
+//    val state = BreedDetailState(breed = Breed.mockBreeds[0], isLoading = false)
+//    BreedDetailScreen(state = state, scaffold = scaffold)
 }

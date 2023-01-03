@@ -1,19 +1,26 @@
 package com.artemissoftware.core_ui.composables.scaffold
 
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
+import com.artemissoftware.core_ui.composables.connectivity.FFConnectivityStatus
+import com.artemissoftware.core_ui.composables.dialog.FFDialog
 import com.artemissoftware.core_ui.composables.indicator.FFIndicator
 import com.artemissoftware.core_ui.composables.loading.FFLoading
+import kotlinx.coroutines.launch
 
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterialApi::class, ExperimentalAnimationApi::class)
 @Composable
 fun FFBottomSheetScaffold(
     isLoading: Boolean = false,
+    ffUiScaffoldState: FFUiScaffoldState? = null,
+    showConnectivityStatus: Boolean = true,
     sheetShape: Shape = MaterialTheme.shapes.large,
     sheetContent: @Composable ColumnScope.() -> Unit,
     content: @Composable (PaddingValues) -> Unit,
@@ -26,6 +33,8 @@ fun FFBottomSheetScaffold(
     )
     val scaffoldState = rememberBottomSheetScaffoldState(bottomSheetState = sheetState)
 
+    val coroutineScope = rememberCoroutineScope()
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -34,6 +43,12 @@ fun FFBottomSheetScaffold(
             scaffoldState = scaffoldState,
             sheetShape = sheetShape,
             sheetPeekHeight =  42.dp,
+            topBar = {
+                Column {
+                    toolbar.invoke()
+                    if(showConnectivityStatus) FFConnectivityStatus()
+                }
+            },
             sheetContent = {
 
                 BottomSheetContent(sheetContent = sheetContent)
@@ -41,8 +56,12 @@ fun FFBottomSheetScaffold(
             content = content
         )
 
-        toolbar()
 
+        ffUiScaffoldState?.let {
+            coroutineScope.launch {
+                if(it.bottomSheet.value) scaffoldState.bottomSheetState.expand() else scaffoldState.bottomSheetState.collapse()
+            }
+        }
         FFLoading(isLoading = isLoading)
     }
 }

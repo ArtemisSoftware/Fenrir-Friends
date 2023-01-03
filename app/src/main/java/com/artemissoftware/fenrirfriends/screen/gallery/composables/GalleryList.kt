@@ -47,7 +47,7 @@ fun GalleryList(
     onItemClick: (Breed) -> Unit,
     detailType: BreedDetailType = BreedDetailType.BULLET
 ){
-    val state = rememberLazyListState(6)
+    val state = rememberLazyListState()
 
     LazyColumn(
         state = state,
@@ -61,9 +61,9 @@ fun GalleryList(
             items = breeds,
             key = { breed -> breed.id }
         ) { breed ->
-            breed?.let {
+            breed?.let { breedDetail->
                 BreedCard(
-                    breed = it,
+                    breed = breedDetail,
                     detailType = detailType,
                     onClick = {
                         onItemClick.invoke(it)

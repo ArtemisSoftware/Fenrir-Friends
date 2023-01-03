@@ -25,7 +25,7 @@ open class FFUiScaffoldState(
     var selectedBottomBarItem = mutableStateOf<FFBottomBarState>(FFBottomBarState())
         private set
 
-    protected var deepLink = mutableStateOf<Uri?>(null)
+    var bottomSheet = mutableStateOf<Boolean>(false)
         private set
 
 
@@ -36,6 +36,14 @@ open class FFUiScaffoldState(
 
     fun closeDialog() {
         dialog.value = null
+    }
+
+    fun expandBottomSheet() {
+        bottomSheet.value = true
+    }
+
+    fun collapseBottomSheet() {
+        bottomSheet.value = true
     }
 
     fun setBottomBarDestinations(items: List<BottomBarItem>) {
