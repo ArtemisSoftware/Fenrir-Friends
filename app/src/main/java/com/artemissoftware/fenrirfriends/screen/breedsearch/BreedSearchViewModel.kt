@@ -3,10 +3,14 @@ package com.artemissoftware.fenrirfriends.screen.breedsearch
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.artemissoftware.core_ui.composables.dialog.models.FFDialogOptions
 import com.artemissoftware.core_ui.composables.dialog.models.FFDialogType
 import com.artemissoftware.core_ui.composables.toolbar.models.FFSearchToolBarState
-import com.artemissoftware.domain.Resource
+import com.artemissoftware.data.errors.FenrisFriendsNetworkException
+import com.artemissoftware.data.errors.NetworkErrors
+import com.artemissoftware.domain.models.Breed
 import com.artemissoftware.domain.usecases.SearchBreedUseCase
 import com.artemissoftware.fenrirfriends.BuildConfig.SEARCH_DELAY
 import com.artemissoftware.fenrirfriends.R
@@ -37,6 +41,10 @@ class BreedSearchViewModel @Inject constructor(
 
     private var searchJob: Job? = null
 
+    private val _searchResults = MutableStateFlow<PagingData<Breed>>(PagingData.empty())
+    val searchResults = _searchResults
+
+
     override fun onTriggerEvent(event: BreedSearchEvents) {
         when(event){
 
@@ -57,11 +65,22 @@ class BreedSearchViewModel @Inject constructor(
                 searchText.value = event.text
                 searchBreeds(query = event.text)
             }
+            is BreedSearchEvents.Reload -> {
+                errorDialog(ex = event.ex, event.reloadEvent)
+            }
+            is BreedSearchEvents.ShowLoading -> {
+                _state.value = _state.value.copy(
+                    isLoading = event.loading
+                )
+            }
+            BreedSearchEvents.RepeatLastSearch -> {
+                searchBreeds(query = searchText.value)
+            }
         }
     }
 
 
-    private fun searchBreeds(query: String){
+    private fun searchBreeds(query: String) {
 
         searchJob?.cancel()
 
@@ -71,42 +90,45 @@ class BreedSearchViewModel @Inject constructor(
 
             delay(SEARCH_DELAY)
 
-            searchBreedUseCase.invoke(query).collect{ result ->
-
-                when(result) {
-                    is Resource.Success -> {
-
-                        _state.value = _state.value.copy(
-                            breeds = result.data ?: emptyList(),
-                            isLoading = false
-                        )
-                    }
-                    is Resource.Error -> {
-                        _state.value = _state.value.copy(
-                            breeds = result.data ?: emptyList(),
-                            isLoading = false
-                        )
-
-                        sendUiEvent(
-                            UiEvent.ShowDialog(
-                                FFDialogType.Error(
-                                    title = "Search",
-                                    description = result.message ?: "Unknown error",
-                                    dialogOptions = FFDialogOptions(
-                                        confirmationTextId = R.string.ok,
-                                    )
-                                )
-                            )
-                        )
-                    }
-                    is Resource.Loading -> {
-                        _state.value = _state.value.copy(
-                            isLoading = true
-                        )
-                    }
-                }
-
+            searchBreedUseCase.invoke(query).cachedIn(viewModelScope).collect {
+                _searchResults.value = it
             }
         }
     }
+
+    private fun errorDialog(ex: FenrisFriendsNetworkException, reloadEvent: () -> Unit) {
+
+        if(ex.code == NetworkErrors.UNKNOWN_HOST.first){
+            sendUiEvent(
+                UiEvent.ShowDialog(
+                    FFDialogType.Info(
+                        title = "Gallery",
+                        description = ex.message ?: "Unknown error",
+                        dialogOptions = FFDialogOptions(
+                            confirmationTextId = R.string.ok,
+                            confirmation = {
+                                reloadEvent.invoke()
+                            },
+                            cancelTextId = R.string.cancel
+                        )
+                    )
+                )
+            )
+        }
+        else {
+
+            sendUiEvent(
+                UiEvent.ShowDialog(
+                    FFDialogType.Error(
+                        title = "Gallery",
+                        description = ex.message ?: "Unknown error",
+                        dialogOptions = FFDialogOptions(
+                            confirmationTextId = R.string.ok,
+                        )
+                    )
+                )
+            )
+        }
+    }
+
 }

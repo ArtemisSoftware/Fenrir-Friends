@@ -16,7 +16,7 @@ import com.artemissoftware.core_ui.composables.scaffold.FFScaffold
 import com.artemissoftware.core_ui.composables.toolbar.FFToolBar
 import com.artemissoftware.core_ui.composables.toolbar.FFToolbarAction
 import com.artemissoftware.domain.models.Breed
-import com.artemissoftware.fenrirfriends.composables.paging.HandlePagingResult_
+import com.artemissoftware.fenrirfriends.composables.paging.HandlePagingResult
 import com.artemissoftware.fenrirfriends.screen.gallery.composables.BreedGallery
 import com.artemissoftware.fenrirfriends.screen.gallery.models.GalleryViewType
 
@@ -26,41 +26,14 @@ fun GalleryScreen(
 ) {
 
     val state = viewModel.state.collectAsState()
-    val breeds: LazyPagingItems<Breed> = viewModel.breeds.collectAsLazyPagingItems()
+    val breedsPagingItems: LazyPagingItems<Breed> = viewModel.breeds.collectAsLazyPagingItems()
 
     BuildGalleryScreen(
         state = state.value,
         events = viewModel::onTriggerEvent,
-        pagingItems = breeds
+        pagingItems = breedsPagingItems
     )
 
-
-/*
-    Scaffold(
-
-        content = {
-            val result = HandlePagingResult(heroes = allHeroes)
-
-            if (result) {
-                LazyColumn(
-                    
-                ) {
-                    items(
-                        items = allHeroes,
-                        key = { hero ->
-                            hero.id
-                        }
-                    ) { hero ->
-                        hero?.let {
-                            FFText(text = hero.name)
-                        }
-                    }
-                }
-            }
-        }
-    )
-*/
-//
 }
 
 @Composable
@@ -91,7 +64,7 @@ private fun BuildGalleryScreen(
         },
         content =  {
 
-            HandlePagingResult_(
+            HandlePagingResult(
                 items = pagingItems,
                 loading = {
                     events?.invoke(GalleryEvents.ShowLoading(it))

@@ -6,9 +6,10 @@ import androidx.paging.compose.LazyPagingItems
 import com.artemissoftware.data.errors.FenrisFriendsNetworkException
 
 @Composable
-fun <T: Any>HandlePagingResult_(
+fun <T: Any>HandlePagingResult(
     items: LazyPagingItems<T>,
     loading: (Boolean) -> Unit,
+    emptyContent: @Composable () -> Unit = {},
     errorContent: @Composable (FenrisFriendsNetworkException) -> Unit,
     content: @Composable () -> Unit
 ) {
@@ -36,7 +37,7 @@ fun <T: Any>HandlePagingResult_(
                 errorContent((error.error as FenrisFriendsNetworkException))
             }
             items.itemCount < 1 ->{
-                //EmptyScreen()
+                emptyContent.invoke()
             }
             else -> { }
         }
