@@ -1,6 +1,7 @@
 package com.artemissoftware.fenrirfriends.composables.paging
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import com.artemissoftware.data.errors.FenrisFriendsNetworkException
@@ -9,8 +10,8 @@ import com.artemissoftware.data.errors.FenrisFriendsNetworkException
 fun <T: Any>HandlePagingResult(
     items: LazyPagingItems<T>,
     loading: (Boolean) -> Unit,
-    emptyContent: @Composable () -> Unit = {},
-    errorContent: @Composable (FenrisFriendsNetworkException) -> Unit,
+    emptyContent: () -> Unit = {},
+    errorContent: (FenrisFriendsNetworkException) -> Unit,
     content: @Composable () -> Unit
 ) {
 
@@ -24,7 +25,7 @@ fun <T: Any>HandlePagingResult(
         }
 
         content()
-        loading.invoke((loadState.refresh is LoadState.Loading) && items.itemCount < 1)
+        loading.invoke((loadState.append is LoadState.Loading) && items.itemCount < 1)
 
         when {
 
@@ -34,7 +35,12 @@ fun <T: Any>HandlePagingResult(
                 }
             }
             error != null -> {
-                errorContent((error.error as FenrisFriendsNetworkException))
+                LaunchedEffect(key1 = loadState.refresh){
+                    if(loadState.refresh is LoadState.Error) {
+                        errorContent((error.error as FenrisFriendsNetworkException))
+                    }
+                }
+
             }
             items.itemCount < 1 ->{
                 emptyContent.invoke()

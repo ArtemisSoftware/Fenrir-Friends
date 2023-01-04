@@ -82,7 +82,7 @@ private fun BuildBreedSearchScreen(
             HandlePagingResult(
                 items = searchResults,
                 emptyContent = {
-                    ResultsPlaceHolder(messageId = R.string.start_your_search)
+                    //ResultsPlaceHolder(messageId = R.string.start_your_search)
                     //ResultsPlaceHolder(messageId = R.string.no_results_try_different_search)
                 },
                 loading = {
