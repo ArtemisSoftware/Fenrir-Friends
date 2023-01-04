@@ -1,7 +1,6 @@
 package com.artemissoftware.fenrirfriends.screen.gallery
 
 import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.MoreVert
@@ -78,7 +77,7 @@ private fun BuildGalleryScreen(
                         }
                     )
                 },
-                errorContent = {
+                errorEvent = {
                     events?.invoke(GalleryEvents.Reload(
                         ex = it,
                         reloadEvent = { pagingItems.refresh() }

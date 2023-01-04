@@ -6,4 +6,5 @@ import com.artemissoftware.domain.models.Breed
 
 data class BreedSearchState(
     val isLoading: Boolean = false,
+    val isSearching: Boolean = false,
 )

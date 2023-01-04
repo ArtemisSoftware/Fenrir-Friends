@@ -5,8 +5,12 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldColors
 import androidx.compose.material.TextFieldDefaults
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.FocusState
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
@@ -17,6 +21,7 @@ fun FFTextField(
     modifier: Modifier = Modifier,
     value: String,
     onValueChange: (String) -> Unit = {},
+    onFocusChange: (FocusState) -> Unit = {},
     placeholder: @Composable (() -> Unit)? = null,
     leadingIcon: @Composable (() -> Unit)? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
@@ -27,8 +32,14 @@ fun FFTextField(
     singleLine: Boolean = true
 ) {
 
+    val focusRequester = FocusRequester()
+
     TextField(
-        modifier = modifier,
+        modifier = modifier
+            .focusRequester(focusRequester)
+            .onFocusChanged {
+                onFocusChange.invoke(it)
+            },
         value = value,
         onValueChange = {
             onValueChange(it)

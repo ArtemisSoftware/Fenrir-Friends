@@ -84,13 +84,25 @@ class BreedSearchViewModel @Inject constructor(
 
         searchJob?.cancel()
 
-        if(query.isBlank()) return
+        if(query.isBlank()) {
+            return
+        }
+
 
         searchJob = viewModelScope.launch {
 
             delay(SEARCH_DELAY)
 
+            _state.value = _state.value.copy(
+                isSearching = true
+            )
+
             searchBreedUseCase.invoke(query).cachedIn(viewModelScope).collect {
+
+                delay(500)
+                _state.value = _state.value.copy(
+                    isSearching = false
+                )
                 _searchResults.value = it
             }
         }

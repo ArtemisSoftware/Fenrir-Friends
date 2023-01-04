@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.focus.FocusState
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.artemissoftware.core_ui.R
@@ -16,11 +17,13 @@ import com.artemissoftware.core_ui.composables.toolbar.models.FFSearchToolBarSta
 @Composable
 fun SearchToolbar(
     searchAppBarState: FFSearchToolBarState,
-    searchTextState: String,
+    searchText: String,
     onBackClicked: (() -> Unit)? = null,
     onTextChanged: (String) -> Unit,
-    onSearchClicked: () -> Unit,
+    onOpenClicked: () -> Unit,
     onCloseClicked: () -> Unit,
+    onFocusChange: (FocusState) -> Unit = {},
+    onSearchClicked: (String) -> Unit,
     toolbarActions: @Composable RowScope.() -> Unit = {},
     @StringRes placeholderTextId: Int,
     iconColor: Color = Color.Black
@@ -35,20 +38,22 @@ fun SearchToolbar(
                     FFToolbarAction(
                         imageVector = Icons.Filled.Search,
                         tint = iconColor,
-                        onClicked = onSearchClicked
+                        onClicked = onOpenClicked
                     )
+                    toolbarActions()
                 }
             )
         }
         else -> {
             FFSearchToolBar(
                 iconColor = iconColor,
-                text = searchTextState,
+                text = searchText,
                 onTextChange = { text ->
                     onTextChanged.invoke(text)
                 },
+                onFocusChange = onFocusChange,
                 onCloseClicked =  onCloseClicked,
-                onSearchClicked = {},
+                onSearchClicked = { onSearchClicked.invoke(searchText) },
                 placeholderTextId = placeholderTextId
             )
         }
@@ -61,11 +66,12 @@ private fun FFSearchToolBarCLOSEDPreview() {
 
     SearchToolbar(
         searchAppBarState = FFSearchToolBarState.CLOSED,
-        searchTextState = "Search text",
+        searchText = "Search text",
         placeholderTextId = R.string.confirm,
-        onSearchClicked = {},
+        onOpenClicked = {},
         onCloseClicked = {},
-        onTextChanged = {}
+        onTextChanged = {},
+        onSearchClicked = {}
     )
 }
 
@@ -75,10 +81,11 @@ private fun FFSearchToolBarOPENEDPreview() {
 
     SearchToolbar(
         searchAppBarState = FFSearchToolBarState.OPENED,
-        searchTextState = "Search text",
+        searchText = "Search text",
         placeholderTextId = R.string.confirm,
-        onSearchClicked = {},
+        onOpenClicked = {},
         onCloseClicked = {},
-        onTextChanged = {}
+        onTextChanged = {},
+        onSearchClicked = {}
     )
 }

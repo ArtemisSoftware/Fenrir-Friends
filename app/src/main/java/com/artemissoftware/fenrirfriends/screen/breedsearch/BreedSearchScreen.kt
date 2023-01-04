@@ -1,14 +1,17 @@
 package com.artemissoftware.fenrirfriends.screen.breedsearch
 
 import androidx.annotation.StringRes
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.ContentAlpha
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -56,7 +59,6 @@ private fun BuildBreedSearchScreen(
     searchResults: LazyPagingItems<Breed>
 ) {
 
-
     FFScaffold(
         isLoading = state.isLoading,
         toolbar = {
@@ -64,15 +66,18 @@ private fun BuildBreedSearchScreen(
             SearchToolbar(
                 iconColor = Color.White,
                 searchAppBarState = searchAppBarState,
-                searchTextState = searchText,
+                searchText = searchText,
                 onTextChanged = {
                     events?.invoke(BreedSearchEvents.UpdateSearch(it))
                 },
-                onSearchClicked = {
+                onOpenClicked = {
                     events?.invoke(BreedSearchEvents.OpenSearch)
                 },
                 onCloseClicked = {
                     events?.invoke(BreedSearchEvents.CloseSearch)
+                },
+                onSearchClicked = {
+                    events?.invoke(BreedSearchEvents.RepeatLastSearch)
                 },
                 placeholderTextId = R.string.search_by_breed_name,
             )
@@ -81,45 +86,55 @@ private fun BuildBreedSearchScreen(
 
             HandlePagingResult(
                 items = searchResults,
-                emptyContent = {
-                    //ResultsPlaceHolder(messageId = R.string.start_your_search)
-                    //ResultsPlaceHolder(messageId = R.string.no_results_try_different_search)
-                },
-                loading = {
-                    //events?.invoke(BreedSearchEvents.ShowLoading(it))
-                },
                 content = {
                     when{
 
-                        searchResults.itemCount == 0 && searchText.isBlank() ->{
-                            //--ResultsPlaceHolder(messageId = R.string.start_your_search)
-                        }
-                        searchResults.itemCount > 0 ->{
+                        searchResults.itemCount > 0->{
 
-                            GalleryList(
-                                breeds = searchResults,
-                                onItemClick = {
-                                    events?.invoke(BreedSearchEvents.GoToBreedDetail(it))
-                                },
-                                BreedDetailType.RESUME
-                            )
+                            Column(
+                                verticalArrangement = Arrangement.spacedBy(4.dp)
+                            ) {
+
+                                SearchResultsPlaceHolder(
+                                    state = state,
+                                    returnedValues = stringResource(R.string.results, searchResults.itemCount)
+                                )
+
+                                GalleryList(
+                                    breeds = searchResults,
+                                    onItemClick = {
+                                        events?.invoke(BreedSearchEvents.GoToBreedDetail(it))
+                                    },
+                                    BreedDetailType.RESUME
+                                )
+                            }
+
+
+                        }
+                        searchAppBarState == FFSearchToolBarState.OPENED ->{
+                            when{
+                                searchResults.itemCount == 0 && searchText.isBlank()->{
+                                    ResultsPlaceHolder(messageId = R.string.start_your_search)
+                                }
+                                searchResults.itemCount == 0 && searchText.isNotBlank()->{
+                                    ResultsPlaceHolder(messageId = R.string.no_results_try_different_search)
+                                }
+                            }
+                        }
+                        else->{
+                            ResultsPlaceHolder(messageId = R.string.start_your_search)
                         }
                     }
                 },
-                errorContent = {
+                errorEvent = {
                     events?.invoke(BreedSearchEvents.Reload(
                         ex = it,
                         reloadEvent = {
-                            events?.invoke(BreedSearchEvents.RepeatLastSearch)
+                            events.invoke(BreedSearchEvents.RepeatLastSearch)
                         }
                     ))
                 }
-
             )
-
-
-
-
         }
     )
 }
@@ -129,10 +144,25 @@ private fun ResultsPlaceHolder(
     @StringRes messageId: Int
 ) {
 
+    var startAnimation by remember { mutableStateOf(false) }
+    val alphaAnim by animateFloatAsState(
+        targetValue = if (startAnimation) 1F else 0f,
+        animationSpec = tween(
+            durationMillis = 4500
+        )
+    )
+
+    LaunchedEffect(key1 = true) {
+        startAnimation = true
+    }
+
+
     Box(modifier = Modifier.fillMaxSize()) {
 
         Column(
-            modifier = Modifier.align(Alignment.Center),
+            modifier = Modifier
+                .align(Alignment.Center)
+                .alpha(alpha = alphaAnim),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -146,46 +176,50 @@ private fun ResultsPlaceHolder(
                 style = TextNewRodin14
             )
         }
-
     }
-
 }
 
 @Composable
-fun RowScope.ToolbarActions(
-    onReorderClicked: () -> Unit,
-    onViewClicked: () -> Unit
+private fun SearchResultsPlaceHolder(
+    state: BreedSearchState,
+    returnedValues: String
 ) {
-    FFToolbarAction(
-        imageVector = Icons.Filled.MoreVert,
-        tint = Color.White,
-        onClicked = { onReorderClicked() }
-    )
-    FFToolbarAction(
-        imageVector = Icons.Filled.Create,
-        tint = Color.White,
-        onClicked = { onViewClicked() }
-    )
+    Box(modifier = Modifier.fillMaxWidth()) {
 
+        if (state.isSearching) {
+            FFLottieLoader(
+                id = com.artemissoftware.core_ui.R.raw.lottie_fenris,
+                modifier = Modifier
+                    .size(40.dp)
+                    .align(Alignment.CenterStart)
+                    .padding(0.dp)
+            )
+        }
+        FFText(
+            style = TextNewRodin14,
+            modifier = Modifier
+                .align(Alignment.CenterEnd)
+                .padding(12.dp),
+            text = returnedValues
+        )
+    }
 }
-
-
-//@Preview(showBackground = true)
-//@Composable
-//private fun BuildBreedSearchScreenPreview() {
-//
-//    val state = BreedSearchState(breeds = Breed.mockBreeds)
-////    BuildBreedSearchScreen(
-////        state, searchText = "searchText",
-////        searchAppBarState = FFSearchToolBarState.OPENED,
-////        events = {},
-////        searchResults
-////    )
-//}
 
 @Preview(showBackground = true)
 @Composable
-private fun NoResultsFoundPreview() {
+private fun ResultsPlaceHolderPreview() {
 
     ResultsPlaceHolder(messageId = R.string.name)
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun SearchResultsPlaceHolderPreview() {
+
+    val state = BreedSearchState(isSearching = true)
+
+    SearchResultsPlaceHolder(
+        state = state,
+        returnedValues = "0 results"
+    )
 }

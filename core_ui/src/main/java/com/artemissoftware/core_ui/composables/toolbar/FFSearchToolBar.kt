@@ -17,6 +17,7 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.focus.FocusState
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -35,6 +36,7 @@ fun FFSearchToolBar(
     @StringRes placeholderTextId: Int,
     onTextChange: (String) -> Unit,
     onCloseClicked: () -> Unit,
+    onFocusChange: (FocusState) -> Unit = {},
     onSearchClicked: (String) -> Unit,
     textColor: Color = Color.White,
     iconColor: Color = Color.White
@@ -56,6 +58,7 @@ fun FFSearchToolBar(
             FFTextField(
                 modifier = Modifier.fillMaxWidth(),
                 value = text,
+                onFocusChange = onFocusChange,
                 onValueChange = {
 
                     trailingIconState = if (it.isNotEmpty()) {

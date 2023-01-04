@@ -9,9 +9,9 @@ import com.artemissoftware.data.errors.FenrisFriendsNetworkException
 @Composable
 fun <T: Any>HandlePagingResult(
     items: LazyPagingItems<T>,
-    loading: (Boolean) -> Unit,
-    emptyContent: () -> Unit = {},
-    errorContent: (FenrisFriendsNetworkException) -> Unit,
+    loading: (Boolean) -> Unit = {},
+    emptyContent: @Composable () -> Unit = {},
+    errorEvent: (FenrisFriendsNetworkException) -> Unit,
     content: @Composable () -> Unit
 ) {
 
@@ -24,6 +24,7 @@ fun <T: Any>HandlePagingResult(
             else -> null
         }
 
+
         content()
         loading.invoke((loadState.append is LoadState.Loading) && items.itemCount < 1)
 
@@ -31,21 +32,23 @@ fun <T: Any>HandlePagingResult(
 
             (error != null && items.itemCount > 0) || items.itemCount > 0-> {
                 error?.let {
-                    errorContent((it.error as FenrisFriendsNetworkException))
+                    errorEvent((it.error as FenrisFriendsNetworkException))
                 }
             }
             error != null -> {
                 LaunchedEffect(key1 = loadState.refresh){
                     if(loadState.refresh is LoadState.Error) {
-                        errorContent((error.error as FenrisFriendsNetworkException))
+                        errorEvent((error.error as FenrisFriendsNetworkException))
                     }
                 }
 
             }
-            items.itemCount < 1 ->{
-                emptyContent.invoke()
+//            items.itemCount < 1 ->{
+//                emptyContent.invoke()
+//            }
+            else -> {
+                //emptyContent.invoke()
             }
-            else -> { }
         }
     }
 }
