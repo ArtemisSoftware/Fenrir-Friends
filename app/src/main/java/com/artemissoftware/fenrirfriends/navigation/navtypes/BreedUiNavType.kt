@@ -15,10 +15,13 @@ class BreedUiNavType : NavType<BreedUi>(isNullableAllowed = true) {
             bundle.getParcelable(key)
         }
     }
-    override fun parseValue(value: String): BreedUi {
-        return Gson().fromJson(value, BreedUi::class.java)
-    }
+
     override fun put(bundle: Bundle, key: String, value: BreedUi) {
         bundle.putParcelable(key, value)
     }
+
+    override fun parseValue(value: String): BreedUi {
+        return Gson().fromJson(value, BreedUi::class.java)
+    }
+
 }

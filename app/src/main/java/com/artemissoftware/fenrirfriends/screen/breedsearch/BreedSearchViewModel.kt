@@ -49,7 +49,7 @@ class BreedSearchViewModel @Inject constructor(
         when(event){
 
             is BreedSearchEvents.GoToBreedDetail -> {
-                sendUiEvent(UiEvent.Navigate(DestinationRoutes.DetailGraph.detailBreed.withCustomArgs(event.breed.toUI())))
+                sendUiEvent(UiEvent.Navigate(DestinationRoutes.DetailGraph.detailBreed.withArgs(breedUi = event.breed.toUI())))
             }
             is BreedSearchEvents.SearchBreed -> {
                 searchBreeds(query = event.query)
@@ -105,7 +105,7 @@ class BreedSearchViewModel @Inject constructor(
                         title = "Gallery",
                         description = ex.message ?: "Unknown error",
                         dialogOptions = FFDialogOptions(
-                            confirmationTextId = R.string.ok,
+                            confirmationTextId = R.string.retry,
                             confirmation = {
                                 reloadEvent.invoke()
                             },

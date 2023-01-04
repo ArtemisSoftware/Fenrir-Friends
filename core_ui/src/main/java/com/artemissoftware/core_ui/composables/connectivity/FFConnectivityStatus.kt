@@ -41,7 +41,7 @@ fun FFConnectivityStatus() {
         visibility = if (!isConnected) {
             true
         } else {
-            delay(2000)
+            delay(1500)
             false
         }
     }

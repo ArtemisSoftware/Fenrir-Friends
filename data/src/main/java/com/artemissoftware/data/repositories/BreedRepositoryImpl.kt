@@ -60,7 +60,7 @@ class BreedRepositoryImpl @Inject constructor(
     @OptIn(ExperimentalPagingApi::class)
     override fun getBreeds(): Flow<PagingData<Breed>> {
 
-        val pagingSourceFactory = { breedDao.getAllHeroes() }
+        val pagingSourceFactory = { breedDao.getBreeds() }
 
         return Pager(
             config = PagingConfig(pageSize = BuildConfig.ITEMS_PER_PAGE),
@@ -88,5 +88,9 @@ class BreedRepositoryImpl @Inject constructor(
                 breedDto.toBreed()
             }
         }
+    }
+
+    override suspend fun getBreed(id: Int): Breed? {
+        return breedDao.getBreed(id)?.toBreed()
     }
 }

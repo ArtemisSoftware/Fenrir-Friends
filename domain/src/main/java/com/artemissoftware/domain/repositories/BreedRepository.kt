@@ -11,4 +11,6 @@ interface BreedRepository {
     suspend fun searchBreed(query: String) : DataResponse<List<Breed>>
     fun getBreeds(): Flow<PagingData<Breed>>
     fun searchBreeds(query: String): Flow<PagingData<Breed>>
+
+    suspend fun getBreed(id: Int): Breed?
 }

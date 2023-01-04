@@ -11,24 +11,20 @@ import com.artemissoftware.fenrirfriends.screen.gallery.models.GalleryViewType
 fun BreedGallery(
     state: GalleryState,
     pagingItems: LazyPagingItems<Breed>,
-    events: ((GalleryEvents) -> Unit)? = null
+    onItemClick: (Breed) -> Unit
 ) {
 
     when(state.viewType){
         GalleryViewType.LIST -> {
             GalleryList(
                 breeds = pagingItems,
-                onItemClick = {
-                    events?.invoke(GalleryEvents.GoToBreedDetail(it))
-                }
+                onItemClick = onItemClick
             )
         }
         GalleryViewType.GRID -> {
             GalleryGrid(
                 breeds = pagingItems,
-                onItemClick = {
-                    events?.invoke(GalleryEvents.GoToBreedDetail(it))
-                }
+                onItemClick = onItemClick
             )
         }
     }

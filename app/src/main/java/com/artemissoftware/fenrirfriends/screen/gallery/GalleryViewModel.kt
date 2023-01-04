@@ -31,7 +31,7 @@ class GalleryViewModel @Inject constructor(
         when(event){
 
             is GalleryEvents.GoToBreedDetail -> {
-                sendUiEvent(UiEvent.Navigate(DestinationRoutes.DetailGraph.detailBreed.withCustomArgs(event.breed.toUI())))
+                sendUiEvent(UiEvent.Navigate(DestinationRoutes.DetailGraph.detailBreed.withArgs(breedId = event.breed.id)))
             }
             is GalleryEvents.ReorderAlphabetic -> {
                 //TODO: falta implementar
@@ -63,7 +63,7 @@ class GalleryViewModel @Inject constructor(
                         title = "Gallery",
                         description = ex.message ?: "Unknown error",
                         dialogOptions = FFDialogOptions(
-                            confirmationTextId = R.string.ok,
+                            confirmationTextId = R.string.retry,
                             confirmation = {
                                 reloadEvent.invoke()
                             },

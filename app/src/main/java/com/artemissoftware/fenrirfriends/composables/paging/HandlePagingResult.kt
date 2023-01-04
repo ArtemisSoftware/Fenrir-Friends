@@ -24,7 +24,7 @@ fun <T: Any>HandlePagingResult(
         }
 
         content()
-        loading.invoke(loadState.refresh is LoadState.Loading)
+        loading.invoke((loadState.refresh is LoadState.Loading) && items.itemCount < 1)
 
         when {
 

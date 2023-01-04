@@ -73,23 +73,24 @@ private fun BuildGalleryScreen(
                     BreedGallery(
                         pagingItems = pagingItems,
                         state = state,
-                        events = events,
+                        onItemClick = {
+                            events?.invoke(GalleryEvents.GoToBreedDetail(it))
+                        }
                     )
                 },
                 errorContent = {
-                    events?.invoke(GalleryEvents.Reload(it, { pagingItems.refresh() }))
+                    events?.invoke(GalleryEvents.Reload(
+                        ex = it,
+                        reloadEvent = { pagingItems.refresh() }
+                    ))
                 }
 
             )
-
-
-
 
         }
     )
 }
 
-fun LazyListState.isScrolledToTheEnd() = layoutInfo.visibleItemsInfo.lastOrNull()?.index == layoutInfo.totalItemsCount - 1
 
 @Composable
 fun RowScope.ToolbarActions(

@@ -107,9 +107,12 @@ private fun BuildBreedSearchScreen(
                     }
                 },
                 errorContent = {
-                    events?.invoke(BreedSearchEvents.Reload(ex = it, reloadEvent = {
-                        events?.invoke(BreedSearchEvents.RepeatLastSearch)
-                    }))
+                    events?.invoke(BreedSearchEvents.Reload(
+                        ex = it,
+                        reloadEvent = {
+                            events?.invoke(BreedSearchEvents.RepeatLastSearch)
+                        }
+                    ))
                 }
 
             )
