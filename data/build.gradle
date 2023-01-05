@@ -51,8 +51,9 @@ dependencies {
     kapt rootProject.libraries.roomCompiler
     implementation rootProject.libraries.roomKtx
     implementation rootProject.libraries.dagger
-    api rootProject.libraries.pagingCompose
     implementation rootProject.libraries.roomPaging
+
+    implementation rootProject.libraries.pagingRuntime
 
     implementation project(':domain')
 }

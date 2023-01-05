@@ -68,6 +68,8 @@ dependencies {
     implementation rootProject.libraries.hiltNavigationCompose
     implementation rootProject.libraries.foundation
 
+    implementation rootProject.libraries.pagingCompose
+
     testImplementation rootProject.tests.junit
     androidTestImplementation rootProject.tests.junitExtension
     androidTestImplementation rootProject.tests.espressoCore

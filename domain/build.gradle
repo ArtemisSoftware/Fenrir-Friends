@@ -12,8 +12,8 @@ dependencies {
 
     implementation rootProject.libraries.kotlinxCoroutinesCore
     implementation rootProject.libraries.dagger
-    implementation rootProject.libraries.pagingCommon
 
+    implementation rootProject.libraries.pagingCommon
 
     testImplementation rootProject.tests.kotlinTestJunit
     testImplementation rootProject.tests.junit

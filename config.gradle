@@ -41,8 +41,9 @@ ext.versions = [
 
         navigationCompose       : '2.5.3',
 
-        pagingCompose           : "1.0.0-alpha14",
-        pagingCommon            : "3.2.0-alpha03",
+        pagingCompose           : "1.0.0-alpha17",
+        pagingCommon            : "3.1.0",
+        pagingRuntime           : "3.1.1",
 
         retrofit                : '2.9.0',
         room                    : '2.4.3',
@@ -94,6 +95,8 @@ ext.libraries = [
 
         pagingCompose                   : "androidx.paging:paging-compose:$versions.pagingCompose",
         pagingCommon                    : "androidx.paging:paging-common:$versions.pagingCommon",
+        pagingRuntime                   : "androidx.paging:paging-runtime:$versions.pagingRuntime",
+
 
         foundation                      : "androidx.compose.foundation:foundation:$versions.foundation",
 ]
