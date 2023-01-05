@@ -10,7 +10,6 @@ import com.artemissoftware.data.errors.FenrisFriendsNetworkException
 fun <T: Any>HandlePagingResult(
     items: LazyPagingItems<T>,
     loading: (Boolean) -> Unit = {},
-    emptyContent: @Composable () -> Unit = {},
     errorEvent: (FenrisFriendsNetworkException) -> Unit,
     content: @Composable () -> Unit
 ) {
@@ -36,19 +35,14 @@ fun <T: Any>HandlePagingResult(
                 }
             }
             error != null -> {
-                LaunchedEffect(key1 = loadState.refresh){
+                LaunchedEffect(key1 = loadState.append){
                     if(loadState.refresh is LoadState.Error) {
                         errorEvent((error.error as FenrisFriendsNetworkException))
                     }
                 }
 
             }
-//            items.itemCount < 1 ->{
-//                emptyContent.invoke()
-//            }
-            else -> {
-                //emptyContent.invoke()
-            }
+            else -> {}
         }
     }
 }

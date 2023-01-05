@@ -21,7 +21,8 @@ import com.artemissoftware.fenrirfriends.screen.models.mappers.toUI
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -67,11 +68,6 @@ class BreedSearchViewModel @Inject constructor(
             }
             is BreedSearchEvents.Reload -> {
                 errorDialog(ex = event.ex, event.reloadEvent)
-            }
-            is BreedSearchEvents.ShowLoading -> {
-                _state.value = _state.value.copy(
-                    isLoading = event.loading
-                )
             }
             BreedSearchEvents.RepeatLastSearch -> {
                 searchBreeds(query = searchText.value)
