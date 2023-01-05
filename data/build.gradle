@@ -39,6 +39,9 @@ dependencies {
     implementation rootProject.libraries.coreKtx
 
     testImplementation rootProject.tests.junit
+
+    testImplementation rootProject.tests.kotlinxCoroutinesTest
+    testImplementation rootProject.tests.kotlinxTestJunit
     androidTestImplementation rootProject.tests.junitExtension
     androidTestImplementation rootProject.tests.espressoCore
 

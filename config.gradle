@@ -33,6 +33,7 @@ ext.versions = [
         kotlin                  : '1.7.20',
         kotlinxCoroutinesCore   : '1.6.4',
         kotlinTestJunit         : '1.5.10',
+        kotlinxCoroutinesTest   : '1.6.0',
 
         lifecycleRuntimeKtx     : '2.3.1',
         lottie                  : '5.2.0',
@@ -113,6 +114,9 @@ ext.tests = [
         kotlinTestJunit         : "org.jetbrains.kotlin:kotlin-test-junit:$versions.kotlinTestJunit",
 
         mockito                 : "org.mockito.kotlin:mockito-kotlin:$versions.mockito",
+
+        kotlinxCoroutinesTest   : "org.jetbrains.kotlinx:kotlinx-coroutines-test:$versions.kotlinxCoroutinesTest",
+        kotlinxTestJunit        : "org.jetbrains.kotlin:kotlin-test-junit:$versions.kotlin"
 ]
 
 ext.classpath = [
