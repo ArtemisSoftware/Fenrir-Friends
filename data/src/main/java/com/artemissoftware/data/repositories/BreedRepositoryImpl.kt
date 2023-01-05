@@ -63,7 +63,7 @@ class BreedRepositoryImpl @Inject constructor(
         val pagingSourceFactory = { breedDao.getBreeds() }
 
         return Pager(
-            config = PagingConfig(pageSize = BuildConfig.ITEMS_PER_PAGE),
+            config = PagingConfig(pageSize = ITEMS_PER_PAGE),
             remoteMediator = BreedRemoteMediator(
                 dogApi = dogApiSource,
                 fenrirDatabase = fenrirDatabase
