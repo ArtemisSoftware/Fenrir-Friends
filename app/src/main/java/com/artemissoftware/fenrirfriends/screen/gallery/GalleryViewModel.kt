@@ -47,17 +47,21 @@ class GalleryViewModel @Inject constructor(
             }
             is GalleryEvents.ShowLoading -> {
 
-                viewModelScope.launch {
-                    if(event.loading == false){
-                        delay(1700)
-                    }
-
-                    _state.value = _state.value.copy(
-                        isLoading = event.loading
-                    )
-                }
+                showLoading(event.loading)
 
             }
+        }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        viewModelScope.launch {
+            if (!isLoading) {
+                delay(1700)
+            }
+
+            _state.value = _state.value.copy(
+                isLoading = isLoading
+            )
         }
     }
 
