@@ -2,6 +2,7 @@ package com.artemissoftware.fenrirfriends.screen.breedsearch
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.graphics.Color
@@ -51,6 +52,8 @@ private fun BuildBreedSearchScreen(
     windowSize: WindowSize
 ) {
 
+    val listState = rememberLazyListState()
+
     FFScaffold(
         isLoading = state.isLoading,
         toolbar = {
@@ -93,12 +96,13 @@ private fun BuildBreedSearchScreen(
                             searchResults.itemCount > 0->{
 
                                 GalleryList(
-                                    windowSize = windowSize,
                                     breeds = searchResults,
                                     onItemClick = {
                                         events?.invoke(BreedSearchEvents.GoToBreedDetail(it))
                                     },
-                                    detailType = BreedDetailType.RESUME
+                                    detailType = BreedDetailType.RESUME,
+                                    windowSize = windowSize,
+                                    listState = listState
                                 )
                             }
                             searchAppBarState == FFSearchToolBarState.OPENED ->{

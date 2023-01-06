@@ -3,6 +3,7 @@ package com.artemissoftware.fenrirfriends.screen.gallery.composables
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.staggeredgrid.LazyStaggeredGridState
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.rememberLazyStaggeredGridState
@@ -52,15 +53,16 @@ fun GalleryGrid(
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun GalleryGrid(
+    gridState: LazyStaggeredGridState,
     breeds: LazyPagingItems<Breed>,
     onItemClick: (Breed) -> Unit,
     detailType: BreedDetailType = BreedDetailType.BULLET
 ){
-    val state = rememberLazyStaggeredGridState()
+
 
     LazyVerticalStaggeredGrid(
         columns = StaggeredGridCells.Fixed(2),
-        state = state
+        state = gridState
     ) {
         items(breeds.itemCount)
         { index ->

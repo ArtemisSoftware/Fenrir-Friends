@@ -1,11 +1,15 @@
 package com.artemissoftware.fenrirfriends.screen.gallery
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.lazy.staggeredgrid.rememberLazyStaggeredGridState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.GridView
 import androidx.compose.material.icons.rounded.ViewList
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.paging.compose.LazyPagingItems
@@ -18,6 +22,7 @@ import com.artemissoftware.domain.models.Breed
 import com.artemissoftware.fenrirfriends.composables.paging.HandlePagingResult
 import com.artemissoftware.fenrirfriends.screen.gallery.composables.BreedGallery
 import com.artemissoftware.fenrirfriends.screen.gallery.models.GalleryViewType
+import kotlinx.coroutines.launch
 
 @Composable
 fun GalleryScreen(
@@ -37,6 +42,7 @@ fun GalleryScreen(
 
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun BuildGalleryScreen(
     state: GalleryState,
@@ -44,6 +50,9 @@ private fun BuildGalleryScreen(
     pagingItems: LazyPagingItems<Breed>,
     windowSize: WindowSize
 ) {
+
+    val listState = rememberLazyListState()
+    val gridState = rememberLazyStaggeredGridState()
 
     FFScaffold(
         isLoading = state.isLoading,
@@ -70,6 +79,8 @@ private fun BuildGalleryScreen(
                 },
                 content = {
                     BreedGallery(
+                        listState = listState,
+                        gridState = gridState,
                         windowSize = windowSize,
                         pagingItems = pagingItems,
                         state = state,
