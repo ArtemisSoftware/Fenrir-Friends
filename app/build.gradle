@@ -62,6 +62,7 @@ dependencies {
     implementation rootProject.libraries.composeUiToolingPreview
     implementation rootProject.libraries.composeMaterial
     implementation rootProject.libraries.coilCompose
+    implementation rootProject.libraries.materialIconsExtended
 
     implementation rootProject.libraries.hiltAndroid
     kapt rootProject.libraries.hiltAndroidCompiler
