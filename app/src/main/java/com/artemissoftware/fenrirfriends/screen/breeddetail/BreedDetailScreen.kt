@@ -8,7 +8,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -27,7 +26,6 @@ import com.artemissoftware.domain.models.Breed
 import com.artemissoftware.fenrirfriends.R
 import com.artemissoftware.fenrirfriends.composables.breed.models.BreedDetailType
 import com.artemissoftware.fenrirfriends.screen.gallery.composables.BreedDetail
-import kotlinx.coroutines.launch
 
 
 @Composable
@@ -77,10 +75,9 @@ private fun BreedDetailScreen(
                     detailType = BreedDetailType.FULL_DETAIL
                 )
 
-
                 scaffold.expandBottomSheet(600)
-
             }
+
         },
         content = {
             ImageDisplay(state.breed)

@@ -4,7 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.artemissoftware.core_ui.composables.dialog.models.FFDialogOptions
 import com.artemissoftware.core_ui.composables.dialog.models.FFDialogType
-import com.artemissoftware.domain.models.Breed
+import com.artemissoftware.domain.Resource
 import com.artemissoftware.domain.usecases.GetBreedDetailUseCase
 import com.artemissoftware.fenrirfriends.R
 import com.artemissoftware.fenrirfriends.base.FFBaseEventViewModel
@@ -45,6 +45,36 @@ class BreedDetailViewModel @Inject constructor(
     }
 
 
+    private fun loadDetail(breedUi: BreedUi?, breedId: Int?){
+
+        viewModelScope.launch {
+            getBreedDetailUseCase(breed = breedUi?.toBreed(), breedId =  breedId).collect { result ->
+
+                when(result){
+
+                    is Resource.Success ->{
+                        _state.value = _state.value.copy(
+                            breed = result.data,
+                            isLoading = false
+                        )
+                    }
+                    is Resource.Error -> {
+                        _state.value = _state.value.copy(
+                            isLoading = false
+                        )
+                        showDialog(message = result.message ?: ERROR_LOADING_DETAIL)
+                    }
+                    is Resource.Loading -> {
+                        _state.value = _state.value.copy(
+                            isLoading = true
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+
     private fun showDialog(message: String){
 
         sendUiEvent(
@@ -64,43 +94,8 @@ class BreedDetailViewModel @Inject constructor(
     }
 
 
-    private fun loadDetail(breedUi: BreedUi?, breedId: Int?){
-
-        when{
-
-            breedUi != null ->{
-                _state.value = _state.value.copy(
-                    breed = breedUi.toBreed()
-                )
-            }
-            breedId != null ->{
-                getDetail(breedId = breedId)
-            }
-            else->{
-                showDialog(message = ERROR_LOADING_DETAIL)
-            }
-        }
-
-    }
-
-    private fun getDetail(breedId: Int){
-
-        viewModelScope.launch {
-            getBreedDetailUseCase(breedId)?.let { breed ->
-                _state.value = _state.value.copy(
-                    breed = breed
-                )
-            } ?: kotlin.run {
-                showDialog(message = ERROR_UNAVAILABLE_DETAIL_PROVIDED_ID)
-            }
-        }
-
-
-    }
-
     companion object{
         private const val ERROR_LOADING_DETAIL = "Error loading detail"
-        private const val ERROR_UNAVAILABLE_DETAIL_PROVIDED_ID = "Unvailable detail for the provided breed"
     }
 
 }
