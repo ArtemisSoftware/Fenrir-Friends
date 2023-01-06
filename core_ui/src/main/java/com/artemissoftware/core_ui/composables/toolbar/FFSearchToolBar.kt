@@ -22,6 +22,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.artemissoftware.core_ui.R
@@ -50,13 +52,20 @@ fun FFSearchToolBar(
 
         Surface(
             modifier = Modifier
-                .fillMaxWidth(),
+                .fillMaxWidth().semantics {
+                    contentDescription = "FFSearchToolBar"
+                },
             color = Color.Transparent,
             elevation = 0.dp
         ) {
 
             FFTextField(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .semantics {
+                        contentDescription = "TextField"
+                    }
+                ,
                 value = text,
                 onFocusChange = onFocusChange,
                 onValueChange = {
@@ -90,7 +99,10 @@ fun FFSearchToolBar(
 
                     FFToolbarAction(
                         modifier = Modifier
-                            .alpha(ContentAlpha.medium),
+                            .alpha(ContentAlpha.medium)
+                            .semantics {
+                                contentDescription = "CloseButton"
+                            },
                         imageVector = Icons.Filled.Close,
                         tint = iconColor,
                         onClicked = {
