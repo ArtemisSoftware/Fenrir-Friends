@@ -49,7 +49,7 @@ SEARCH_DELAY
 
 
 
-Image #1            |                Image #2                 |  Image #3
-:-------------------------:|:---------------------------------------:|:----------------------------:
-<img src="images/Fenrir_Friends_1.jpg">    | <img src="images/Fenrir_Friends_2.jpg"> |  <img src="images/Fenrir_Friends_3.jpg"> 
+Image #1            |                Image #2                 |  Image #3                 |  Image #4
+:-------------------------:|:---------------------------------------:|:----------------------------:|:----------------------------:
+<img src="images/Fenrir_Friends_1.jpg">    | <img src="images/Fenrir_Friends_2.jpg"> |  <img src="images/Fenrir_Friends_3.jpg">  |  <img src="images/Fenrir_Friends_4.jpg"> 
 

@@ -10,7 +10,8 @@ import com.artemissoftware.data.dabase.entities.BreedRemoteKeysEntity
 
 @Database(
     entities = [BreedEntity::class, BreedRemoteKeysEntity::class],
-    version = 1
+    version = 1,
+    exportSchema = true
 )
 abstract class FenrirDatabase: RoomDatabase() {
 
