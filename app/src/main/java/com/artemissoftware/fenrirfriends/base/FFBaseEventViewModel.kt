@@ -20,4 +20,8 @@ abstract class FFBaseEventViewModel <E: FFBaseEvents> : ViewModel() {
             _uiEvent.send(event)
         }
     }
+
+    companion object{
+        const val UNKNOWN_ERROR = "Unknown error"
+    }
 }

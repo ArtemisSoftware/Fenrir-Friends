@@ -80,7 +80,7 @@ class BreedDetailViewModel @Inject constructor(
         sendUiEvent(
             UiEvent.ShowDialog(
                 FFDialogType.Error(
-                    title = "Detail",
+                    title = R.string.detail,
                     description = message,
                     dialogOptions = FFDialogOptions(
                         confirmationTextId = R.string.ok,

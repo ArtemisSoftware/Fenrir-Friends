@@ -208,7 +208,7 @@ private fun FFDialogOptions(
 private fun FFDialogPreview(){
 
     val dialogTypeSuccess = FFDialogType.Success(
-        title =  "Get updates",
+        title =  R.string.back_online,
         description = "Allow permission to send notifications every day of the year",
         icon = Icons.Filled.Build,
         dialogOptions = FFDialogOptions(
@@ -218,7 +218,7 @@ private fun FFDialogPreview(){
     )
 
     val dialogTypError = FFDialogType.Error(
-        title =  "Get updates",
+        title =  R.string.back_online,
         description = "Allow permission to send notifications every day of the year",
         imageId = R.drawable.ic_android,
         dialogOptions = FFDialogOptions(

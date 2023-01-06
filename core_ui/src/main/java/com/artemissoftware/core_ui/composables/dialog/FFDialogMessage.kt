@@ -7,6 +7,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Build
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -23,7 +24,7 @@ fun FFDialogMessage(dialogType: FFDialogType){
         modifier = Modifier.padding(16.dp)
     ) {
         FFText(
-            text = dialogType.title,
+            text = stringResource(id = dialogType.title),
             style = TextNewRodinBold,
             modifier = Modifier
                 .padding(top = 5.dp)
@@ -47,7 +48,7 @@ fun FFDialogMessage(dialogType: FFDialogType){
 private fun FFDialogMessagePreview(){
 
     val dialogTypeSuccess = FFDialogType.Success(
-        title =  "Get updates",
+        title =  R.string.back_online,
         description = "Allow permission to send notifications every day of the year",
         icon = Icons.Filled.Build,
         dialogOptions = FFDialogOptions(

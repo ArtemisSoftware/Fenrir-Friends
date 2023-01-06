@@ -84,7 +84,6 @@ class BreedSearchViewModel @Inject constructor(
             return
         }
 
-
         searchJob = viewModelScope.launch {
 
             delay(SEARCH_DELAY)
@@ -110,8 +109,8 @@ class BreedSearchViewModel @Inject constructor(
             sendUiEvent(
                 UiEvent.ShowDialog(
                     FFDialogType.Info(
-                        title = "Gallery",
-                        description = ex.message ?: "Unknown error",
+                        title = R.string.gallery,
+                        description = ex.message ?: UNKNOWN_ERROR,
                         dialogOptions = FFDialogOptions(
                             confirmationTextId = R.string.retry,
                             confirmation = {
@@ -128,8 +127,8 @@ class BreedSearchViewModel @Inject constructor(
             sendUiEvent(
                 UiEvent.ShowDialog(
                     FFDialogType.Error(
-                        title = "Gallery",
-                        description = ex.message ?: "Unknown error",
+                        title = R.string.gallery,
+                        description = ex.message ?: UNKNOWN_ERROR,
                         dialogOptions = FFDialogOptions(
                             confirmationTextId = R.string.ok,
                         )
