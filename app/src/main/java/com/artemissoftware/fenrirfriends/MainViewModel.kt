@@ -4,6 +4,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Place
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.rounded.Home
+import androidx.compose.material.icons.rounded.Search
 import com.artemissoftware.core_ui.composables.scaffold.FFUiScaffoldState
 import com.artemissoftware.core_ui.navigation.models.BaseDestination
 import com.artemissoftware.core_ui.navigation.models.BottomBarItem
@@ -46,7 +48,7 @@ class MainViewModel @Inject constructor(): FFBaseEventViewModel<MainEvents>() {
                         bottomBarItems.add(
                             gallery.toBottomBarItem(
                                 title = R.string.gallery,
-                                icon = Icons.Default.Home
+                                icon = Icons.Rounded.Home
                             )
                         )
                     }
@@ -54,7 +56,7 @@ class MainViewModel @Inject constructor(): FFBaseEventViewModel<MainEvents>() {
                         bottomBarItems.add(
                             breadSearch.toBottomBarItem(
                                 title = R.string.search,
-                                icon = Icons.Default.Search
+                                icon = Icons.Rounded.Search
                             )
                         )
                     }

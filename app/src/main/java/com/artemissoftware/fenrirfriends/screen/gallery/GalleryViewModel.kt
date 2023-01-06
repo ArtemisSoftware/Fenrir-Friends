@@ -33,10 +33,6 @@ class GalleryViewModel @Inject constructor(
             is GalleryEvents.GoToBreedDetail -> {
                 sendUiEvent(UiEvent.Navigate(DestinationRoutes.DetailGraph.detailBreed.withArgs(breedId = event.breed.id)))
             }
-            is GalleryEvents.ReorderAlphabetic -> {
-                //TODO: falta implementar
-                //--sendUiEvent(UiEvent.Navigate(DestinationRoutes.GalleryGraph.pictures.withCustomArgs(event.breed.toUI())))
-            }
             is GalleryEvents.ChangeView -> {
 
                 _state.value = _state.value.copy(

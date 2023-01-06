@@ -8,7 +8,6 @@ import com.artemissoftware.fenrirfriends.base.events.FFBaseEvents
 sealed class GalleryEvents: FFBaseEvents() {
 
     data class GoToBreedDetail(val breed: Breed) : GalleryEvents()
-    object ReorderAlphabetic: GalleryEvents()
     object ChangeView: GalleryEvents()
 
     data class Reload(val ex: FenrisFriendsNetworkException, val reloadEvent: () ->Unit): GalleryEvents()

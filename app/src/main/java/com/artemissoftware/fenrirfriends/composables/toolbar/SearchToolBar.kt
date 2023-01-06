@@ -3,7 +3,7 @@ package com.artemissoftware.fenrirfriends.composables.toolbar
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.rounded.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.focus.FocusState
 import androidx.compose.ui.graphics.Color
@@ -36,7 +36,7 @@ fun SearchToolbar(
                 iconColor = iconColor,
                 toolbarActions = {
                     FFToolbarAction(
-                        imageVector = Icons.Filled.Search,
+                        imageVector = Icons.Rounded.Search,
                         tint = iconColor,
                         onClicked = onOpenClicked
                     )

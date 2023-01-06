@@ -2,25 +2,20 @@ package com.artemissoftware.core_ui.composables.toolbar
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.Surface
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.rounded.Close
+import androidx.compose.material.icons.rounded.Search
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.focus.FocusState
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
@@ -90,7 +85,7 @@ fun FFSearchToolBar(
                     FFToolbarAction(
                         modifier = Modifier
                             .alpha(ContentAlpha.medium),
-                        imageVector = Icons.Filled.Search,
+                        imageVector = Icons.Rounded.Search,
                         tint = iconColor,
                         onClicked = {}
                     )
@@ -103,7 +98,7 @@ fun FFSearchToolBar(
                             .semantics {
                                 contentDescription = "CloseButton"
                             },
-                        imageVector = Icons.Filled.Close,
+                        imageVector = Icons.Rounded.Close,
                         tint = iconColor,
                         onClicked = {
 
