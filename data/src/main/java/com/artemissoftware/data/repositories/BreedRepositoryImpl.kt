@@ -26,36 +26,6 @@ class BreedRepositoryImpl @Inject constructor(
 
     private val breedDao = fenrirDatabase.breedDao
 
-    override suspend fun getBreeds(limit: Int, page: Int): DataResponse<List<Breed>> {
-
-        return try {
-
-            val apiResponse = safeApiCall { dogApiSource.getBreeds(limit = limit, page = page) }
-
-            return DataResponse(data = apiResponse.map { response ->
-                response.toBreed()
-            })
-
-        } catch (ex: FenrisFriendsNetworkException) {
-            DataResponse(error = ex.toDataError())
-        }
-    }
-
-    override suspend fun searchBreed(query: String): DataResponse<List<Breed>> {
-
-        return try {
-
-            val apiResponse = safeApiCall { dogApiSource.getBreeds() }
-                .filter { breedDto -> breedDto.name.uppercase(Locale.ROOT).contains(query.uppercase(Locale.ROOT)) }
-
-            return DataResponse(data = apiResponse.map { response ->
-                response.toBreed()
-            })
-
-        } catch (ex: FenrisFriendsNetworkException) {
-            DataResponse(error = ex.toDataError())
-        }
-    }
 
     @OptIn(ExperimentalPagingApi::class)
     override fun getBreeds(): Flow<PagingData<Breed>> {

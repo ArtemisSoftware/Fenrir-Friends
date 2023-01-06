@@ -7,6 +7,5 @@ import com.artemissoftware.domain.models.Breed
 import kotlinx.coroutines.flow.Flow
 
 interface DogApiSource {
-    suspend fun getBreeds(): List<BreedDto>
     suspend fun getBreeds(limit: Int, page: Int): List<BreedDto>
 }
