@@ -13,4 +13,5 @@
     <string name="start_your_search">Start your search</string>
     <string name="results">%1$d results</string>
     <string name="detail">Detail</string>
+    <string name="click_to_reload">Click to reload</string>
 </resources>

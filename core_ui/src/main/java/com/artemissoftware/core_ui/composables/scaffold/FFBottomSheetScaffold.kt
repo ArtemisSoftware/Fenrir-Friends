@@ -11,7 +11,6 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
 import com.artemissoftware.core_ui.R
 import com.artemissoftware.core_ui.composables.connectivity.FFConnectivityStatus
-import com.artemissoftware.core_ui.composables.dialog.FFDialog
 import com.artemissoftware.core_ui.composables.indicator.FFIndicator
 import com.artemissoftware.core_ui.composables.loading.FFLoading
 import kotlinx.coroutines.delay
@@ -24,7 +23,7 @@ fun FFBottomSheetScaffold(
     isLoading: Boolean = false,
     ffUiScaffoldState: FFUiScaffoldState? = null,
     showConnectivityStatus: Boolean = true,
-    @RawRes lottieId: Int = R.raw.lottie_fenris,
+    @RawRes lottieId: Int = R.raw.lottie_data_loading,
     sheetShape: Shape = MaterialTheme.shapes.large,
     sheetContent: @Composable ColumnScope.() -> Unit,
     content: @Composable (PaddingValues) -> Unit,

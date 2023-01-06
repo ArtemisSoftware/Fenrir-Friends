@@ -17,7 +17,7 @@ import com.artemissoftware.fenrirfriends.R
 import com.artemissoftware.fenrirfriends.composables.breed.models.BreedDetailType
 import com.artemissoftware.fenrirfriends.composables.paging.HandlePagingResult
 import com.artemissoftware.fenrirfriends.composables.toolbar.SearchToolbar
-import com.artemissoftware.fenrirfriends.screen.breedsearch.composables.SearchResultsPlaceHolder
+import com.artemissoftware.fenrirfriends.screen.breedsearch.composables.AnimatedPlaceHolder
 import com.artemissoftware.fenrirfriends.screen.breedsearch.composables.SearchStatisticsPlaceHolder
 import com.artemissoftware.fenrirfriends.screen.gallery.composables.GalleryList
 
@@ -108,21 +108,22 @@ private fun BuildBreedSearchScreen(
                             searchAppBarState == FFSearchToolBarState.OPENED ->{
                                 when{
                                     searchResults.itemCount == 0 && searchText.isBlank()->{
-                                        SearchResultsPlaceHolder(messageId = R.string.start_your_search)
+                                        AnimatedPlaceHolder(lottie = R.raw.lottie_data_not_found, messageId = R.string.start_your_search)
                                     }
                                     searchResults.itemCount == 0 && searchText.isNotBlank()->{
-                                        SearchResultsPlaceHolder(messageId = R.string.no_results_try_different_search)
+                                        AnimatedPlaceHolder(lottie = R.raw.lottie_data_not_found, messageId = R.string.no_results_try_different_search)
                                     }
                                 }
                             }
                             else->{
-                                SearchResultsPlaceHolder(messageId = R.string.start_your_search)
+                                AnimatedPlaceHolder(lottie = R.raw.lottie_data_not_found, messageId = R.string.start_your_search)
                             }
                         }
                     },
-                    errorEvent = {
+                    errorEvent = { ex->
+
                         events?.invoke(BreedSearchEvents.Reload(
-                            ex = it,
+                            ex = ex,
                             reloadEvent = {
                                 events.invoke(BreedSearchEvents.RepeatLastSearch)
                             }

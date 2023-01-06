@@ -1,5 +1,6 @@
 package com.artemissoftware.fenrirfriends.screen.gallery
 
+import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import com.artemissoftware.core_ui.composables.dialog.models.FFDialogOptions
 import com.artemissoftware.core_ui.composables.dialog.models.FFDialogType
@@ -14,7 +15,9 @@ import com.artemissoftware.fenrirfriends.navigation.DestinationRoutes
 import com.artemissoftware.fenrirfriends.screen.gallery.models.GalleryViewType
 import com.artemissoftware.fenrirfriends.screen.models.mappers.toUI
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -43,9 +46,17 @@ class GalleryViewModel @Inject constructor(
                 errorDialog(ex = event.ex, event.reloadEvent)
             }
             is GalleryEvents.ShowLoading -> {
-                _state.value = _state.value.copy(
-                    isLoading = event.loading
-                )
+
+                viewModelScope.launch {
+                    if(event.loading == false){
+                        delay(1700)
+                    }
+
+                    _state.value = _state.value.copy(
+                        isLoading = event.loading
+                    )
+                }
+
             }
         }
     }

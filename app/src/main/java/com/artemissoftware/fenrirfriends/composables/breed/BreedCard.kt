@@ -36,7 +36,7 @@ fun BreedCard(
         model = ImageRequest.Builder(LocalContext.current)
             .data(breed.url)
             .size(Size.ORIGINAL)
-            .crossfade(500)
+            .crossfade(800)
             .error(R.drawable.ic_fenrir_placeholder)
             .placeholder(R.drawable.ic_fenrir_placeholder)
             .build()

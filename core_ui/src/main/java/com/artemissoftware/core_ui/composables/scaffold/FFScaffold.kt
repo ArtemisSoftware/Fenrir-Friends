@@ -34,7 +34,7 @@ fun FFScaffold(
     ffUiScaffoldState: FFUiScaffoldState? = null,
     isLoading: Boolean = false,
     showConnectivityStatus: Boolean = true,
-    @RawRes lottieId: Int = R.raw.lottie_fenris,
+    @RawRes lottieId: Int = R.raw.lottie_data_loading,
     navController: NavHostController? = null,
     bottomBarItems: List<BottomBarItem> = emptyList(),
     content: @Composable (PaddingValues) -> Unit,

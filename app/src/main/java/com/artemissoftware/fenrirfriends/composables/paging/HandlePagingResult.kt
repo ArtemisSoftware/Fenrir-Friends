@@ -25,13 +25,15 @@ fun <T: Any>HandlePagingResult(
 
 
         content()
-        loading.invoke((loadState.append is LoadState.Loading) && items.itemCount < 1)
+        loading.invoke((loadState.prepend is LoadState.Loading) && items.itemCount < 1)
 
         when {
 
             (error != null && items.itemCount > 0) || items.itemCount > 0-> {
-                error?.let {
-                    errorEvent((it.error as FenrisFriendsNetworkException))
+                LaunchedEffect(key1 = loadState.append) {
+                    error?.let {
+                        errorEvent((it.error as FenrisFriendsNetworkException))
+                    }
                 }
             }
             error != null -> {

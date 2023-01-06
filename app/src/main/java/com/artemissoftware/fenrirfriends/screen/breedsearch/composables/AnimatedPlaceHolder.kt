@@ -1,5 +1,6 @@
 package com.artemissoftware.fenrirfriends.screen.breedsearch.composables
 
+import androidx.annotation.RawRes
 import androidx.annotation.StringRes
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -18,7 +19,9 @@ import com.artemissoftware.fenrirfriends.R
 
 
 @Composable
-fun SearchResultsPlaceHolder(
+fun AnimatedPlaceHolder(
+    @RawRes lottie: Int,
+    modifier: Modifier = Modifier,
     @StringRes messageId: Int
 ) {
 
@@ -38,7 +41,7 @@ fun SearchResultsPlaceHolder(
     Box(modifier = Modifier.fillMaxSize()) {
 
         Column(
-            modifier = Modifier
+            modifier = modifier
                 .align(Alignment.Center)
                 .alpha(alpha = alphaAnim),
             verticalArrangement = Arrangement.Center,
@@ -46,7 +49,7 @@ fun SearchResultsPlaceHolder(
         ) {
 
             FFLottieLoader(
-                id = R.raw.lottie_data_not_found,
+                id = lottie,
                 modifier = Modifier.size(200.dp)
             )
             FFText(
@@ -59,7 +62,7 @@ fun SearchResultsPlaceHolder(
 
 @Preview(showBackground = true)
 @Composable
-private fun ResultsPlaceHolderPreview() {
+private fun AnimatedPlaceHolderPreview() {
 
-    SearchResultsPlaceHolder(messageId = R.string.name)
+    AnimatedPlaceHolder(lottie = R.raw.lottie_data_not_found, messageId = R.string.name)
 }
