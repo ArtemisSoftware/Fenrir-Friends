@@ -6,6 +6,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import com.artemissoftware.core_ui.composables.scaffold.FFUiScaffoldState
+import com.artemissoftware.core_ui.composables.window.models.WindowSize
 import com.artemissoftware.fenrirfriends.base.FFBaseEventViewModel
 import com.artemissoftware.fenrirfriends.base.events.FFBaseEvents
 import com.artemissoftware.fenrirfriends.composables.navigation.ManageUIEvents
@@ -27,7 +28,7 @@ interface NavigationRoute<E: FFBaseEvents, T : FFBaseEventViewModel<E>> {
      * Returns the screen's content.
      */
     @Composable
-    fun Content(viewModel: T)
+    fun Content(viewModel: T, windowSize: WindowSize)
 
     /**
      * Generates the composable for this route.
@@ -35,7 +36,8 @@ interface NavigationRoute<E: FFBaseEvents, T : FFBaseEventViewModel<E>> {
     fun composable(
         navGraphBuilder: NavGraphBuilder,
         scaffoldState: FFUiScaffoldState,
-        navController: NavHostController
+        navController: NavHostController,
+        windowSize: WindowSize
     ) {
         navGraphBuilder.composable(
             route = getDestination().getRouteInFull(),
@@ -46,7 +48,7 @@ interface NavigationRoute<E: FFBaseEvents, T : FFBaseEventViewModel<E>> {
 
             val viewModel = viewModel()
 
-            Content(viewModel)
+            Content(viewModel, windowSize)
 
             ManageUIEvents(
                 uiEvent = viewModel.uiEvent,

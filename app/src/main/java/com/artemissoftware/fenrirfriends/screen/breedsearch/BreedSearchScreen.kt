@@ -10,6 +10,7 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.artemissoftware.core_ui.composables.scaffold.FFScaffold
 import com.artemissoftware.core_ui.composables.toolbar.models.FFSearchToolBarState
+import com.artemissoftware.core_ui.composables.window.models.WindowSize
 import com.artemissoftware.domain.models.Breed
 import com.artemissoftware.fenrirfriends.R
 import com.artemissoftware.fenrirfriends.composables.breed.models.BreedDetailType
@@ -22,7 +23,8 @@ import com.artemissoftware.fenrirfriends.screen.gallery.composables.GalleryList
 
 @Composable
 fun BreedSearchScreen(
-    viewModel: BreedSearchViewModel
+    viewModel: BreedSearchViewModel,
+    windowSize: WindowSize
 ) {
 
     val state = viewModel.state.collectAsState()
@@ -33,7 +35,8 @@ fun BreedSearchScreen(
         events = viewModel::onTriggerEvent,
         searchAppBarState = viewModel.toolbarState.value,
         searchText = viewModel.searchText.value,
-        searchResults = searchResults
+        searchResults = searchResults,
+        windowSize = windowSize
     )
 }
 
@@ -44,7 +47,8 @@ private fun BuildBreedSearchScreen(
     searchText: String,
     searchAppBarState: FFSearchToolBarState,
     events: ((BreedSearchEvents) -> Unit)? = null,
-    searchResults: LazyPagingItems<Breed>
+    searchResults: LazyPagingItems<Breed>,
+    windowSize: WindowSize
 ) {
 
     FFScaffold(
@@ -89,11 +93,12 @@ private fun BuildBreedSearchScreen(
                             searchResults.itemCount > 0->{
 
                                 GalleryList(
+                                    windowSize = windowSize,
                                     breeds = searchResults,
                                     onItemClick = {
                                         events?.invoke(BreedSearchEvents.GoToBreedDetail(it))
                                     },
-                                    BreedDetailType.RESUME
+                                    detailType = BreedDetailType.RESUME
                                 )
                             }
                             searchAppBarState == FFSearchToolBarState.OPENED ->{

@@ -14,6 +14,7 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import com.artemissoftware.core_ui.composables.scaffold.FFScaffold
 import com.artemissoftware.core_ui.composables.toolbar.FFToolBar
 import com.artemissoftware.core_ui.composables.toolbar.FFToolbarAction
+import com.artemissoftware.core_ui.composables.window.models.WindowSize
 import com.artemissoftware.domain.models.Breed
 import com.artemissoftware.fenrirfriends.composables.paging.HandlePagingResult
 import com.artemissoftware.fenrirfriends.screen.gallery.composables.BreedGallery
@@ -21,7 +22,8 @@ import com.artemissoftware.fenrirfriends.screen.gallery.models.GalleryViewType
 
 @Composable
 fun GalleryScreen(
-    viewModel: GalleryViewModel
+    viewModel: GalleryViewModel,
+    windowSize: WindowSize
 ) {
 
     val state = viewModel.state.collectAsState()
@@ -30,7 +32,8 @@ fun GalleryScreen(
     BuildGalleryScreen(
         state = state.value,
         events = viewModel::onTriggerEvent,
-        pagingItems = breedsPagingItems
+        pagingItems = breedsPagingItems,
+        windowSize = windowSize
     )
 
 }
@@ -39,7 +42,8 @@ fun GalleryScreen(
 private fun BuildGalleryScreen(
     state: GalleryState,
     events: ((GalleryEvents) -> Unit)? = null,
-    pagingItems: LazyPagingItems<Breed>
+    pagingItems: LazyPagingItems<Breed>,
+    windowSize: WindowSize
 ) {
 
     FFScaffold(
@@ -70,6 +74,7 @@ private fun BuildGalleryScreen(
                 },
                 content = {
                     BreedGallery(
+                        windowSize = windowSize,
                         pagingItems = pagingItems,
                         state = state,
                         onItemClick = {

@@ -5,13 +5,15 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.artemissoftware.core_ui.composables.scaffold.FFUiScaffoldState
+import com.artemissoftware.core_ui.composables.window.models.WindowSize
 import com.artemissoftware.fenrirfriends.navigation.DestinationRoutes.RootGraph
 import com.artemissoftware.fenrirfriends.screen.home.HomeScreen
 
 @Composable
 fun RootNavigationGraph(
     navController: NavHostController,
-    scaffoldState: FFUiScaffoldState
+    scaffoldState: FFUiScaffoldState,
+    windowSize: WindowSize
 ) {
     NavHost(
         navController = navController,
@@ -20,7 +22,7 @@ fun RootNavigationGraph(
     ) {
 
         composable(route = RootGraph.home.getRouteInFull()) {
-            HomeScreen(scaffoldState = scaffoldState)
+            HomeScreen(scaffoldState = scaffoldState, windowSize = windowSize)
         }
     }
 }

@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -13,12 +12,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import androidx.paging.ExperimentalPagingApi
-import androidx.paging.PagingData
-import androidx.paging.compose.collectAsLazyPagingItems
+import com.artemissoftware.core_ui.composables.window.rememberWindowSize
 import com.artemissoftware.fenrirfriends.navigation.graphs.RootNavigationGraph
 import com.artemissoftware.fenrirfriends.ui.theme.FenrirFriendsTheme
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.MutableStateFlow
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -37,6 +34,7 @@ class MainActivity : ComponentActivity() {
 
                     RootNavigationGraph(
                         navController = rememberNavController(),
+                        windowSize = rememberWindowSize(),
                         scaffoldState = viewModel.scaffoldState
                     )
 
