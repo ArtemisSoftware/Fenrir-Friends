@@ -20,17 +20,22 @@ import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import coil.size.Size
 import com.artemissoftware.core_ui.composables.scaffold.FFBottomSheetScaffold
+import com.artemissoftware.core_ui.composables.scaffold.FFScaffold
 import com.artemissoftware.core_ui.composables.scaffold.FFUiScaffoldState
 import com.artemissoftware.core_ui.composables.toolbar.FFToolBar
+import com.artemissoftware.core_ui.composables.window.models.WindowSize
+import com.artemissoftware.core_ui.composables.window.models.WindowType
 import com.artemissoftware.domain.models.Breed
 import com.artemissoftware.fenrirfriends.R
+import com.artemissoftware.fenrirfriends.composables.breed.BreedCard
 import com.artemissoftware.fenrirfriends.composables.breed.models.BreedDetailType
 import com.artemissoftware.fenrirfriends.screen.gallery.composables.BreedDetail
 
 
 @Composable
 fun BreedDetailScreen(
-    viewModel: BreedDetailViewModel
+    viewModel: BreedDetailViewModel,
+    windowSize: WindowSize
 ) {
 
     val state = viewModel.state.collectAsState()
@@ -40,7 +45,8 @@ fun BreedDetailScreen(
     BreedDetailScreen(
         state = state.value,
         events = viewModel::onTriggerEvent,
-        scaffold = scaffold
+        scaffold = scaffold,
+        windowSize = windowSize
     )
 }
 
@@ -49,9 +55,28 @@ fun BreedDetailScreen(
 private fun BreedDetailScreen(
     state: BreedDetailState,
     events: ((BreedDetailEvents) -> Unit)? = null,
-    scaffold: FFUiScaffoldState
+    scaffold: FFUiScaffoldState,
+    windowSize: WindowSize
 ) {
 
+    when (windowSize.height) {
+        WindowType.Medium, WindowType.Expanded -> {
+            ColumnContent(state = state, events = events, scaffold = scaffold)
+        }
+        else -> {
+
+            RowContent(state = state, events = events)
+        }
+    }
+
+}
+
+@Composable
+private fun ColumnContent(
+    state: BreedDetailState,
+    events: ((BreedDetailEvents) -> Unit)? = null,
+    scaffold: FFUiScaffoldState
+) {
     FFBottomSheetScaffold(
         ffUiScaffoldState = scaffold,
         isLoading = state.isLoading,
@@ -83,7 +108,44 @@ private fun BreedDetailScreen(
             ImageDisplay(state.breed)
         }
     )
+
 }
+
+
+
+@Composable
+private fun RowContent(
+    state: BreedDetailState,
+    events: ((BreedDetailEvents) -> Unit)? = null,
+) {
+
+    FFScaffold(
+        isLoading = state.isLoading,
+        toolbar = {
+            FFToolBar(
+                iconColor = Color.White,
+                onBackClicked = {
+                    events?.invoke(BreedDetailEvents.PopBackStack)
+                }
+            )
+        },
+        content =  {
+
+            state.breed?.let {
+                BreedCard(
+                    breed = it,
+                    detailType = BreedDetailType.FULL_DETAIL,
+                    onClick = {},
+                    windowSize = WindowSize(WindowType.Compact, WindowType.Compact)
+                )
+            }
+
+        }
+    )
+
+}
+
+
 
 @Composable
 private fun ImageDisplay(breed: Breed?) {
@@ -99,7 +161,7 @@ private fun ImageDisplay(breed: Breed?) {
 
     Box(modifier = Modifier
         .fillMaxSize()
-        .background(if(painter.state  is AsyncImagePainter.State.Error) Color.LightGray else Color.Black)
+        .background(if (painter.state is AsyncImagePainter.State.Error) Color.LightGray else Color.Black)
     ){
 
         Image(

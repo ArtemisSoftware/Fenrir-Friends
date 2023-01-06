@@ -15,6 +15,7 @@ import coil.request.ImageRequest
 import coil.size.Size
 import com.artemissoftware.core_ui.composables.card.FFCard
 import com.artemissoftware.core_ui.composables.window.models.WindowSize
+import com.artemissoftware.core_ui.composables.window.models.WindowType
 import com.artemissoftware.core_ui.composables.window.models.WindowType.Expanded
 import com.artemissoftware.core_ui.composables.window.models.WindowType.Medium
 import com.artemissoftware.domain.models.Breed
@@ -24,6 +25,7 @@ import com.artemissoftware.fenrirfriends.composables.breed.models.BreedDetailTyp
 
 @Composable
 fun BreedCard(
+    modifier : Modifier = Modifier,
     breed: Breed,
     detailType: BreedDetailType = BreedDetailType.BULLET,
     onClick: (Breed) -> Unit,
@@ -42,7 +44,7 @@ fun BreedCard(
 
     FFCard(
         onClick = { onClick.invoke(breed) },
-        modifier = Modifier
+        modifier = modifier
             .wrapContentSize()
             .clip(RoundedCornerShape(4.dp))
             .background(color = Color.White)
@@ -50,10 +52,7 @@ fun BreedCard(
 
         windowSize?.let {
             when (windowSize.height) {
-                Expanded -> {
-                    BreedContentColumn(painter = painter, detailType = detailType, breed = breed)
-                }
-                Medium -> {
+                Medium, Expanded -> {
                     BreedContentColumn(painter = painter, detailType = detailType, breed = breed)
                 }
                 else -> {

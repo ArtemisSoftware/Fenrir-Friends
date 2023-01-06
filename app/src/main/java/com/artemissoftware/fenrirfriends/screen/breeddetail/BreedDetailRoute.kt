@@ -14,5 +14,5 @@ object BreedDetailRoute: NavigationRoute<BreedDetailEvents, BreedDetailViewModel
     override fun viewModel(): BreedDetailViewModel = hiltViewModel()
 
     @Composable
-    override fun Content(viewModel: BreedDetailViewModel, windowSize: WindowSize) = BreedDetailScreen(viewModel = viewModel)
+    override fun Content(viewModel: BreedDetailViewModel, windowSize: WindowSize) = BreedDetailScreen(viewModel = viewModel, windowSize = windowSize)
 }
