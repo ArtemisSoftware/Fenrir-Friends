@@ -10,6 +10,7 @@ import androidx.compose.material.icons.rounded.GridView
 import androidx.compose.material.icons.rounded.ViewList
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
@@ -25,6 +26,7 @@ import com.artemissoftware.fenrirfriends.composables.paging.HandlePagingResult
 import com.artemissoftware.fenrirfriends.screen.breedsearch.composables.AnimatedPlaceHolder
 import com.artemissoftware.fenrirfriends.screen.gallery.composables.BreedGallery
 import com.artemissoftware.fenrirfriends.screen.gallery.models.GalleryViewType
+import kotlinx.coroutines.launch
 
 @Composable
 fun GalleryScreen(
@@ -55,6 +57,7 @@ private fun BuildGalleryScreen(
 
     val listState = rememberLazyListState()
     val gridState = rememberLazyStaggeredGridState()
+    val coroutineScope = rememberCoroutineScope()
 
     FFScaffold(
         isLoading = state.isLoading,
@@ -66,6 +69,16 @@ private fun BuildGalleryScreen(
                         iconColor = iconColor,
                         galleryViewType = state.viewType,
                         onViewClicked = {
+
+                            coroutineScope.launch {
+                                if(state.viewType==GalleryViewType.LIST){
+                                    gridState.scrollToItem(listState.firstVisibleItemIndex)
+                                }
+                                else{
+                                    listState.scrollToItem(gridState.firstVisibleItemIndex)
+                                }
+                            }
+
                             events?.invoke(GalleryEvents.ChangeView)
                         },
                     )
