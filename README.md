@@ -43,6 +43,7 @@ SEARCH_DELAY
     - Flow
     - Paging 3
     - Coil
+    - Lottie
     
 ## Preview:
 
